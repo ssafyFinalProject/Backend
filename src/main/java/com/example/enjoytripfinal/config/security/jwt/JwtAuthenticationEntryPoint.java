@@ -1,4 +1,4 @@
-package com.example.enjoytripfinal.config.jwt;
+package com.example.enjoytripfinal.config.security.jwt;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;

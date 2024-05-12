@@ -1,4 +1,4 @@
-package com.example.enjoytripfinal.config.jwt;
+package com.example.enjoytripfinal.config.security.jwt;
 
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;

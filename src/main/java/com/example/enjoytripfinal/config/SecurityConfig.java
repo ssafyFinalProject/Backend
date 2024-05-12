@@ -1,7 +1,7 @@
 package com.example.enjoytripfinal.config;
 
-import com.example.enjoytripfinal.config.jwt.JwtAccessDeniedHandler;
-import com.example.enjoytripfinal.config.jwt.JwtAuthenticationEntryPoint;
+import com.example.enjoytripfinal.config.security.jwt.JwtAccessDeniedHandler;
+import com.example.enjoytripfinal.config.security.jwt.JwtAuthenticationEntryPoint;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -21,7 +21,9 @@ public class SecurityConfig {
     private final String[] AUTH_WHITE_LIST = {
             "/auth/refresh",
             "/auth/save",
-            "/auth/login"
+            "/auth/login",
+            "/v3/**",
+            "/swagger-ui/**"
     };
 
     @Bean

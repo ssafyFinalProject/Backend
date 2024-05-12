@@ -1,4 +1,4 @@
-package com.example.enjoytripfinal.config.jwt;
+package com.example.enjoytripfinal.config.security.jwt;
 
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;
@@ -32,7 +32,4 @@ public class TokenProvider {
         }
     }
 
-    public Optional<Authentication> getAuthentication(String token) {
-        // TODO
-    }
 }
