@@ -18,25 +18,30 @@ public class MemberController {
     @GetMapping("/duplicate/{name}")
     public ResponseEntity<DuplicateNicknameResponse> duplicateNickname(@PathVariable String name) {
         // 닉네임 중복 검사
+        return ResponseEntity.ok().build();
     }
 
     @GetMapping
     public ResponseEntity<Void> getMemberByNickname(@RequestParam(name = "nickname") String nickname){
         // nickname으로 회원 정보 반환
+        return ResponseEntity.ok().build();
     }
 
     @GetMapping("/me")
     public ResponseEntity<Void> getMemberByJwt(){
         // 자기 자신의 정보 반환
+        return ResponseEntity.ok().build();
     }
 
     @PutMapping
     public ResponseEntity<Void> updateMember(@RequestBody UpdateMemberRequestDto request) {
         // 회원 정보 수정
+        return ResponseEntity.ok().build();
     }
 
     @DeleteMapping
     public ResponseEntity<Void> deleteMember() {
         // 회원 정보 삭제
+        return ResponseEntity.ok().build();
     }
 }
