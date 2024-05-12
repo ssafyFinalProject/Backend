@@ -1,5 +1,6 @@
 package com.example.enjoytripfinal.domain.member.controller;
 
+import com.example.enjoytripfinal.domain.member.dto.request.UpdateMemberRequestDto;
 import com.example.enjoytripfinal.domain.member.service.MemberService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -24,7 +25,7 @@ public class MemberController {
     }
 
     @PutMapping
-    public ResponseEntity<Void> updateMember() {
+    public ResponseEntity<Void> updateMember(@RequestBody UpdateMemberRequestDto request) {
         // 회원 정보 수정
     }
 
