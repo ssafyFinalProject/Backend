@@ -1,3 +1,19 @@
+server:
+  servlet:
+    context-path: /api/v1
 spring:
-  application:
-    name: enjoyTripFinal
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/SSAFY
+    username: root
+    password: 1234
+  jpa:
+    database: mysql
+    show-sql: true
+    hibernate:
+      ddl-auto: none
+    properties:
+      hibernate:
+        auto_quote_keyword: true
+  main:
+    allow-bean-definition-overriding: true
