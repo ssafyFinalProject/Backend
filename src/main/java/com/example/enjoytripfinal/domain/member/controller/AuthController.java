@@ -2,7 +2,10 @@ package com.example.enjoytripfinal.domain.member.controller;
 
 import com.example.enjoytripfinal.domain.member.dto.request.LoginRequestDto;
 import com.example.enjoytripfinal.domain.member.dto.request.SignUpRequestDto;
+import com.example.enjoytripfinal.domain.member.dto.request.TokenRequest;
+import com.example.enjoytripfinal.domain.member.dto.response.TokenDto;
 import com.example.enjoytripfinal.domain.member.service.AuthService;
+import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -28,5 +31,16 @@ public class AuthController {
     @GetMapping("/logout")
     public ResponseEntity<Void> logout(){
         // 로그아웃
+    }
+
+    @PostMapping("/refresh")
+    public ResponseEntity<TokenDto> authorize(@RequestBody @Valid TokenRequest tokenRequest) {
+        // 리프레시 토큰으로 토큰 갱신
+    }
+
+    @GetMapping("/validate")
+    public ResponseEntity<Void> validate() {
+        // 해당 토큰으로 접속했을 때 올바른지 확인
+        return ResponseEntity.noContent().build();
     }
 }
