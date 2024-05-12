@@ -1,6 +1,7 @@
 package com.example.enjoytripfinal.domain.member.controller;
 
 import com.example.enjoytripfinal.domain.member.dto.request.UpdateMemberRequestDto;
+import com.example.enjoytripfinal.domain.member.dto.response.DuplicateNicknameResponse;
 import com.example.enjoytripfinal.domain.member.service.MemberService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -12,6 +13,11 @@ public class MemberController {
 
     public MemberController(MemberService memberService) {
         this.memberService = memberService;
+    }
+
+    @GetMapping("/duplicate/{name}")
+    public ResponseEntity<DuplicateNicknameResponse> duplicateNickname(@PathVariable String name) {
+        // 닉네임 중복 검사
     }
 
     @GetMapping
