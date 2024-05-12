@@ -2,6 +2,7 @@ package com.example.enjoytripfinal.config;
 
 import com.example.enjoytripfinal.config.security.jwt.JwtAccessDeniedHandler;
 import com.example.enjoytripfinal.config.security.jwt.JwtAuthenticationEntryPoint;
+import com.example.enjoytripfinal.config.security.jwt.JwtFilter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -11,12 +12,14 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @Configuration
 @EnableWebSecurity
 @RequiredArgsConstructor
 public class SecurityConfig {
 
+    private final JwtFilter jwtFilter;
     private final JwtAccessDeniedHandler jwtAccessDeniedHandler;
     private final JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
 
@@ -40,6 +43,7 @@ public class SecurityConfig {
                                 .anyRequest()
                                 .authenticated()
                 ).sessionManagement(x -> x.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+                .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)
                 .exceptionHandling(
                         x -> {
                             x.authenticationEntryPoint(jwtAuthenticationEntryPoint);
