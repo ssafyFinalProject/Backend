@@ -1,4 +1,4 @@
-package com.example.enjoytripfinal.domain.member.dto;
+package com.example.enjoytripfinal.domain.member.dto.request;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
