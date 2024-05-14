@@ -92,13 +92,10 @@ public class TokenProvider {
     }
 
     private void addRole(final String role, final Collection<GrantedAuthority> authorities) {
-        if (role.equals(Role.ROLE_ADMIN.name())) {
-            authorities.add(new SimpleGrantedAuthority(Role.ROLE_ADMIN.name()));
-            return;
-        }
-        if (role.equals(Role.ROLE_USER.name())) {
-            authorities.add(new SimpleGrantedAuthority(Role.ROLE_USER.name()));
-        }
+        Arrays.stream(Role.values())
+                .filter(r -> r.name().equals(role))
+                .findFirst()
+                .ifPresent(r -> authorities.add(new SimpleGrantedAuthority(r.name())));
     }
 
     public UsernamePasswordAuthenticationToken makeCredit(Member member) {
