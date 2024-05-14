@@ -25,6 +25,13 @@ public class Member {
     @Enumerated(EnumType.STRING)
     private Role role;
 
+    public Member(String email,String password,String nickName,Role role) {
+        this.email = email;
+        this.password = password;
+        this.nickName = nickName;
+        this.role = role;
+    }
+
     public void updateNickname(String nickName) {
         this.nickName = nickName;
     }
