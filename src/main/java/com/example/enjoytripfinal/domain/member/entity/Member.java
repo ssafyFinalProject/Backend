@@ -5,7 +5,6 @@ import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.GenericGenerator;
 
 import java.util.UUID;
 
@@ -25,4 +24,8 @@ public class Member {
 
     @Enumerated(EnumType.STRING)
     private Role role;
+
+    public void updateNickname(String nickName) {
+        this.nickName = nickName;
+    }
 }

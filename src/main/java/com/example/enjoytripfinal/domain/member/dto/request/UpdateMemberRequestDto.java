@@ -8,5 +8,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class UpdateMemberRequestDto {
-    private String nickname;
+    private String curNickname;
+    private String changeNickname;
 }
