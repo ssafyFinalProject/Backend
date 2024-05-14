@@ -3,6 +3,7 @@ package com.example.enjoytripfinal.domain.member.controller;
 import com.example.enjoytripfinal.domain.member.dto.request.LoginRequestDto;
 import com.example.enjoytripfinal.domain.member.dto.request.SignUpRequestDto;
 import com.example.enjoytripfinal.domain.member.dto.request.TokenRequest;
+import com.example.enjoytripfinal.domain.member.dto.response.AfterLoginResponse;
 import com.example.enjoytripfinal.domain.member.dto.response.TokenDto;
 import com.example.enjoytripfinal.domain.member.service.AuthService;
 import jakarta.validation.Valid;
@@ -19,9 +20,8 @@ public class AuthController {
         this.authService = authService;
     }
     @PostMapping("/signup")
-    public ResponseEntity<Void> signUp(@RequestBody SignUpRequestDto request) {
-        // 회원 가입
-        return ResponseEntity.ok().build();
+    public ResponseEntity<AfterLoginResponse> signUp(@RequestBody SignUpRequestDto request) {
+        return ResponseEntity.ok(authService.signUpMember(request));
     }
 
     @PostMapping("/login")
