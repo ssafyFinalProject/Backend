@@ -29,7 +29,7 @@ public class MemberService {
     }
 
     public MemberResponse getMemberResponseByNickname(String name) {
-        return getMemberResponse(getMemberByNickname(name));
+        return memberMapper.entityToDto(getMemberByNickname(name));
     }
     // 닉네임 통한 member 찾기
     public Member getMemberByNickname(String nickname) {
@@ -42,7 +42,7 @@ public class MemberService {
 
     // 인증된 정보를 바탕으로 현재 사용자의 정보 추출
     public MemberResponse getMemberDtoByJwt() {
-        return getMemberResponse(getMemberById(getMemberIdValue()));
+        return memberMapper.entityToDto(getMemberById(getMemberIdValue()));
     }
 
     public Member getMemberById(UUID id) {
@@ -61,9 +61,6 @@ public class MemberService {
         return memberMapper.entityToDto(curMember);
     }
 
-    private MemberResponse getMemberResponse(Member member) {
-        return memberMapper.entityToDto(member);
-    }
 
     public void deleteMember(UUID id) {
         memberRepository.deleteById(id);
