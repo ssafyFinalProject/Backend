@@ -60,9 +60,8 @@ public class AuthService {
         return new AfterLoginResponse(SignStatus.SIGNIN,tokenDto);
     }
 
-    private TokenDto saveRefreshToken(String userName,TokenDto token) {
+    private void saveRefreshToken(String userName,TokenDto token) {
         refreshTokenRepository.save(new RefreshToken(userName,token.getRefreshToken()));
-        return token;
     }
 
     public void logout() {
