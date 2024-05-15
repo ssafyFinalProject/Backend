@@ -1,0 +1,12 @@
+version: "3"
+
+services:
+  db:
+    image: mysql
+    container_name: db
+    ports:
+      - 3307:3306
+    environment:
+      TZ: Asia/Seoul
+    env_file: .env
+    restart: always

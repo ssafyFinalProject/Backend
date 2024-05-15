@@ -9,4 +9,10 @@ import java.util.UUID;
 public interface MemberRepository extends JpaRepository<Member, UUID> {
     @Override
     Optional<Member> findById(UUID uuid);
+
+    Optional<Member> findByNickName(String name);
+
+    boolean existsByNickName(String nickname);
+
+    Optional<Member> findByEmailAndPassword(String email,String password);
 }

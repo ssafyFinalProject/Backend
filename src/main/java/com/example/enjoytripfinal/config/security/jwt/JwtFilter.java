@@ -26,17 +26,17 @@ public class JwtFilter extends OncePerRequestFilter {
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         Optional<String> jwt = resolveToken(request);
 
-        //jwt.ifPresent(this::setAuthentication);
+        jwt.ifPresent(this::setAuthentication);
 
         filterChain.doFilter(request, response);
     }
 
-    /*private void setAuthentication(final String token) {
+    private void setAuthentication(final String token) {
         if (tokenProvider.validateToken(token)) {
             Optional<Authentication> authentication = tokenProvider.getAuthentication(token);
             authentication.ifPresent(SecurityContextHolder.getContext()::setAuthentication);
         }
-    }*/
+    }
 
     private Optional<String> resolveToken(final HttpServletRequest request) {
         String bearerToken = request.getHeader(AUTHORIZATION_HEADER);
