@@ -1,14 +1,17 @@
 spring:
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/SSAFY
-    username: root
-    password: 1234
+    url: jdbc:mysql://127.0.0.1:3307/SSAFY
+    username: ssafy
+    password: root!
   jpa:
     database: mysql
     show-sql: true
     hibernate:
-      ddl-auto: none
+      ddl-auto: create
     properties:
       hibernate:
         auto_quote_keyword: true
