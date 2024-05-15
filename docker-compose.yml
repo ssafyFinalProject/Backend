@@ -1,27 +1,12 @@
 version: "3"
 
 services:
-  backend:
-    build: ./backend
-    container_name: backend
-    ports:
-      - 8080:8080
-    networks:
-      - backend
-    depends_on:
-      - db
-    env_file: .env
-    restart: always
-    tty: true
-
   db:
     image: mysql
     container_name: db
     ports:
-      - 3306:3306
+      - 3307:3306
+    environment:
+      TZ: Asia/Seoul
     env_file: .env
-    volumes:
-      - ./data:/var/lib/mysql
-    networks:
-      - backend
     restart: always

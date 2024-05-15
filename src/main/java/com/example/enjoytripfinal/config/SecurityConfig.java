@@ -25,7 +25,7 @@ public class SecurityConfig {
 
     private final String[] AUTH_WHITE_LIST = {
             "/auth/refresh",
-            "/auth/save",
+            "/auth/signup",
             "/auth/login",
             "/v3/**",
             "/swagger-ui/**"
