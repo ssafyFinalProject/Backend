@@ -1,8 +1,8 @@
 package com.example.enjoytripfinal.domain.member.service;
 
-import com.example.enjoytripfinal.domain.member.dto.request.UpdateMemberRequestDto;
+import com.example.enjoytripfinal.domain.member.dto.request.UpdateMemberRequest;
 import com.example.enjoytripfinal.domain.member.dto.response.DuplicateNicknameResponse;
-import com.example.enjoytripfinal.domain.member.dto.response.MemberResponseDto;
+import com.example.enjoytripfinal.domain.member.dto.response.MemberResponse;
 import com.example.enjoytripfinal.domain.member.entity.Member;
 import com.example.enjoytripfinal.domain.member.mapper.MemberMapper;
 import com.example.enjoytripfinal.domain.member.repository.MemberRepository;
@@ -11,7 +11,6 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -25,11 +24,11 @@ public class MemberService {
     }
 
     // 닉네임 중복 검사
-    public DuplicateNicknameResponse duplicateNickname(String name) {
+    public DuplicateNicknameResponse checkDuplicateNickname(String name) {
         return new DuplicateNicknameResponse(memberRepository.existsByNickName(name));
     }
 
-    public MemberResponseDto getMemberResponseByNickname(String name) {
+    public MemberResponse getMemberResponseByNickname(String name) {
         return getMemberResponse(getMemberByNickname(name));
     }
     // 닉네임 통한 member 찾기
@@ -37,15 +36,13 @@ public class MemberService {
         return memberRepository.findByNickName(nickname).orElseThrow(EntityNotFoundException::new);
     }
 
-    public String getMemberIdValue() {
-        return SecurityContextHolder.getContext().getAuthentication().getName();
+    public UUID getMemberIdValue() {
+        return UUID.fromString(SecurityContextHolder.getContext().getAuthentication().getName());
     }
 
     // 인증된 정보를 바탕으로 현재 사용자의 정보 추출
-    public MemberResponseDto getMemberDtoByJwt() {
-        String memberIdValue = getMemberIdValue();
-        UUID id = UUID.fromString(memberIdValue);
-        return getMemberResponse(getMemberById(id));
+    public MemberResponse getMemberDtoByJwt() {
+        return getMemberResponse(getMemberById(getMemberIdValue()));
     }
 
     public Member getMemberById(UUID id) {
@@ -54,17 +51,17 @@ public class MemberService {
 
 
     @Transactional
-    public MemberResponseDto updateMember(UpdateMemberRequestDto request) {
+    public MemberResponse updateMember(UpdateMemberRequest request) {
         Member curMember = getMemberByNickname(request.getCurNickname());
 
-        if(!duplicateNickname(request.getChangeNickname()).getIsPresent()) {
+        if(!checkDuplicateNickname(request.getChangeNickname()).getIsPresent()) {
             curMember.updateNickname(request.getChangeNickname());
         }
 
         return memberMapper.entityToDto(curMember);
     }
 
-    public MemberResponseDto getMemberResponse(Member member) {
+    private MemberResponse getMemberResponse(Member member) {
         return memberMapper.entityToDto(member);
     }
 

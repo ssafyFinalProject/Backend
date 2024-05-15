@@ -105,4 +105,11 @@ public class TokenProvider {
         return new UsernamePasswordAuthenticationToken(member.getId().toString(), "", role);
     }
 
+    public TokenDto makeToken(Member member) {
+        UsernamePasswordAuthenticationToken credit = makeCredit(member);
+        TokenDto token = createToken(credit);
+
+        return token;
+    }
+
 }

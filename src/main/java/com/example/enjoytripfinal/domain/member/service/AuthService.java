@@ -1,10 +1,10 @@
 package com.example.enjoytripfinal.domain.member.service;
 
 import com.example.enjoytripfinal.config.security.jwt.TokenProvider;
-import com.example.enjoytripfinal.domain.member.dto.request.LoginRequestDto;
-import com.example.enjoytripfinal.domain.member.dto.request.SignUpRequestDto;
+import com.example.enjoytripfinal.domain.member.dto.request.LoginRequest;
+import com.example.enjoytripfinal.domain.member.dto.request.SignUpRequest;
 import com.example.enjoytripfinal.domain.member.dto.response.AfterLoginResponse;
-import com.example.enjoytripfinal.domain.member.dto.response.MemberResponseDto;
+import com.example.enjoytripfinal.domain.member.dto.response.MemberResponse;
 import com.example.enjoytripfinal.domain.member.dto.response.SignStatus;
 import com.example.enjoytripfinal.domain.member.dto.response.TokenDto;
 import com.example.enjoytripfinal.domain.member.entity.Member;
@@ -42,32 +42,30 @@ public class AuthService {
     }
 
     @Transactional
-    public AfterLoginResponse signUpMember(SignUpRequestDto request) {
+    public AfterLoginResponse signUpMember(SignUpRequest request) {
         Member member = memberRepository.save(memberMapper.dtoToMemberEntity(request));
-        UsernamePasswordAuthenticationToken credit = tokenProvider.makeCredit(member);
-        TokenDto tokenDto = saveRefreshToken(credit,member.getId().toString());
+        TokenDto tokenDto = tokenProvider.makeToken(member);
 
         return new AfterLoginResponse(SignStatus.SIGNUP,tokenDto);
     }
 
     @Transactional
-    public AfterLoginResponse login(LoginRequestDto request) {
+    public AfterLoginResponse login(LoginRequest request) {
         Member member = memberRepository.findByEmailAndPassword(request.getEmail(),request.getPassword()).orElseThrow(EntityNotFoundException::new);
 
-        UsernamePasswordAuthenticationToken credit = tokenProvider.makeCredit(member);
-        TokenDto tokenDto = saveRefreshToken(credit, member.getId().toString());
+        TokenDto tokenDto = tokenProvider.makeToken(member);
 
         return new AfterLoginResponse(SignStatus.SIGNIN,tokenDto);
     }
 
-    public TokenDto saveRefreshToken(Authentication authentication,String userName) {
-        TokenDto token = tokenProvider.createToken(authentication);
+    private TokenDto saveRefreshToken(String userName,TokenDto token) {
+
         refreshTokenRepository.save(new RefreshToken(userName,token.getRefreshToken()));
         return token;
     }
 
     public void logOut() {
-        MemberResponseDto curMember = memberService.getMemberDtoByJwt();
+        MemberResponse curMember = memberService.getMemberDtoByJwt();
         refreshTokenRepository.deleteById(curMember.getMemberId());
     }
 }

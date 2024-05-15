@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public class UpdateMemberRequestDto {
+public class UpdateMemberRequest {
     private String curNickname;
     private String changeNickname;
 }
