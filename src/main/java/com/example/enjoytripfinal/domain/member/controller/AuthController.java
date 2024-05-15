@@ -1,7 +1,7 @@
 package com.example.enjoytripfinal.domain.member.controller;
 
-import com.example.enjoytripfinal.domain.member.dto.request.LoginRequestDto;
-import com.example.enjoytripfinal.domain.member.dto.request.SignUpRequestDto;
+import com.example.enjoytripfinal.domain.member.dto.request.LoginRequest;
+import com.example.enjoytripfinal.domain.member.dto.request.SignUpRequest;
 import com.example.enjoytripfinal.domain.member.dto.request.TokenRequest;
 import com.example.enjoytripfinal.domain.member.dto.response.AfterLoginResponse;
 import com.example.enjoytripfinal.domain.member.dto.response.TokenDto;
@@ -20,12 +20,12 @@ public class AuthController {
         this.authService = authService;
     }
     @PostMapping("/signup")
-    public ResponseEntity<AfterLoginResponse> signUp(@RequestBody SignUpRequestDto request) {
+    public ResponseEntity<AfterLoginResponse> signUp(@RequestBody SignUpRequest request) {
         return ResponseEntity.ok(authService.signUpMember(request));
     }
 
     @PostMapping("/login")
-    public ResponseEntity<AfterLoginResponse> login(@RequestBody LoginRequestDto request) {
+    public ResponseEntity<AfterLoginResponse> login(@RequestBody LoginRequest request) {
         return ResponseEntity.ok(authService.login(request));
     }
 
