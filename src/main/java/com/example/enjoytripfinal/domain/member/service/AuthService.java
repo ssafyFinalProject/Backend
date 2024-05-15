@@ -45,6 +45,7 @@ public class AuthService {
     public AfterLoginResponse signUpMember(SignUpRequest request) {
         Member member = memberRepository.save(memberMapper.dtoToMemberEntity(request));
         TokenDto tokenDto = tokenProvider.makeToken(member);
+        saveRefreshToken(member.getId().toString(),tokenDto);
 
         return new AfterLoginResponse(SignStatus.SIGNUP,tokenDto);
     }
@@ -54,12 +55,12 @@ public class AuthService {
         Member member = memberRepository.findByEmailAndPassword(request.getEmail(),request.getPassword()).orElseThrow(EntityNotFoundException::new);
 
         TokenDto tokenDto = tokenProvider.makeToken(member);
+        saveRefreshToken(member.getId().toString(),tokenDto);
 
         return new AfterLoginResponse(SignStatus.SIGNIN,tokenDto);
     }
 
     private TokenDto saveRefreshToken(String userName,TokenDto token) {
-
         refreshTokenRepository.save(new RefreshToken(userName,token.getRefreshToken()));
         return token;
     }
