@@ -24,6 +24,8 @@ public class Board {
 
     private String content;
 
+    private Long view;
+
     @ManyToOne(
             fetch = FetchType.LAZY,
             cascade = {CascadeType.PERSIST, CascadeType.MERGE}
@@ -37,5 +39,9 @@ public class Board {
 
     public void setMappingMember(Member member) {
         this.member = member;
+    }
+
+    public void upViewCount() {
+        this.view++;
     }
 }
