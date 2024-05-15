@@ -64,7 +64,7 @@ public class AuthService {
         return token;
     }
 
-    public void logOut() {
+    public void logout() {
         MemberResponse curMember = memberService.getMemberDtoByJwt();
         refreshTokenRepository.deleteById(curMember.getMemberId());
     }
