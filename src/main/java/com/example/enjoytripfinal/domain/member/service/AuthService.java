@@ -3,6 +3,7 @@ package com.example.enjoytripfinal.domain.member.service;
 import com.example.enjoytripfinal.config.security.jwt.TokenProvider;
 import com.example.enjoytripfinal.domain.member.dto.request.LoginRequest;
 import com.example.enjoytripfinal.domain.member.dto.request.SignUpRequest;
+import com.example.enjoytripfinal.domain.member.dto.request.TokenRequest;
 import com.example.enjoytripfinal.domain.member.dto.response.AfterLoginResponse;
 import com.example.enjoytripfinal.domain.member.dto.response.MemberResponse;
 import com.example.enjoytripfinal.domain.member.dto.response.SignStatus;
@@ -12,11 +13,15 @@ import com.example.enjoytripfinal.domain.member.entity.RefreshToken;
 import com.example.enjoytripfinal.domain.member.mapper.MemberMapper;
 import com.example.enjoytripfinal.domain.member.repository.MemberRepository;
 import com.example.enjoytripfinal.domain.member.repository.RefreshTokenRepository;
+import com.example.enjoytripfinal.global.AuthorityException;
+import com.example.enjoytripfinal.global.RefreshTokenValidationException;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.Optional;
 
 
 @Service
@@ -62,6 +67,35 @@ public class AuthService {
 
     private void saveRefreshToken(String userName,TokenDto token) {
         refreshTokenRepository.save(new RefreshToken(userName,token.getRefreshToken()));
+    }
+
+    public TokenDto renewalAccessToken(TokenRequest request) {
+        final String refreshToken = request.getRefreshToken();
+
+        if(!tokenProvider.validateToken(refreshToken)) {
+            throw new RefreshTokenValidationException();
+        }
+
+        Optional<Authentication> authentication =
+                tokenProvider.getAuthentication(request.getAccessToken());
+
+        return authentication.map(auth -> new TokenDto(makeAccessToken(auth,refreshToken),refreshToken)).orElseThrow(AuthorityException::new);
+    }
+
+    public String makeAccessToken(final Authentication auth, final String refreshToken) {
+        String userInfo = auth.getName();
+        if(!getRefreshTokenValue(refreshToken).equals(userInfo)) {
+            throw new RefreshTokenValidationException();
+        }
+
+        return tokenProvider.createAccessToken(auth);
+    }
+
+    public String getRefreshTokenValue(String tokenKey) {
+        return refreshTokenRepository
+                .findByTokenKey(tokenKey)
+                .orElseThrow(EntityNotFoundException::new)
+                .getTokenValue();
     }
 
     public void logout() {

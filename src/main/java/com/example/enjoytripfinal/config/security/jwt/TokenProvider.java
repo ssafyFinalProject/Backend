@@ -24,6 +24,26 @@ public class TokenProvider {
     private static final Long ACCESS_TOKEN_EXPIRE_LENGTH = 60L * 60 * 24 * 1000; // 1 Day
     private static final Long REFRESH_TOKEN_EXPIRE_LENGTH = 60L * 60 * 24 * 14 * 1000; // 14 Days
 
+    public String createAccessToken(Authentication authentication) {
+        String authorities =
+                authentication.getAuthorities().stream()
+                        .map(GrantedAuthority::getAuthority)
+                        .collect(Collectors.joining(","));
+
+        Long now = (new Date()).getTime();
+        Date validAccessDate = new Date(now + ACCESS_TOKEN_EXPIRE_LENGTH);
+
+        String accessToken =
+                Jwts.builder()
+                        .setSubject(authentication.getName())
+                        .claim(AUTHORITIES_KEY, authorities)
+                        .signWith(key, SignatureAlgorithm.HS512)
+                        .setExpiration(validAccessDate)
+                        .compact();
+
+        return accessToken;
+    }
+
     public TokenDto createToken(Authentication authentication) {
         String authorities =
                 authentication.getAuthorities().stream()

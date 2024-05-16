@@ -37,13 +37,11 @@ public class AuthController {
 
     @PostMapping("/refresh")
     public ResponseEntity<TokenDto> authorize(@RequestBody @Valid TokenRequest tokenRequest) {
-        // 리프레시 토큰으로 토큰 갱신
-        return ResponseEntity.ok().build();
+        return ResponseEntity.ok(authService.renewalAccessToken(tokenRequest));
     }
 
     @GetMapping("/validate")
     public ResponseEntity<Void> validate() {
-        // 해당 토큰으로 접속했을 때 올바른지 확₩
         return ResponseEntity.noContent().build();
     }
 }
