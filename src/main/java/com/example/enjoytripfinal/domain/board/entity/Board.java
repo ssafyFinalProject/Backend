@@ -43,6 +43,11 @@ public class Board {
         this.view = 0l;
     }
 
+    public void updateBoard(String title, String content) {
+        this.title = title;
+        this.content = content;
+    }
+
     public void setMappingMember(Member member) {
         this.member = member;
     }

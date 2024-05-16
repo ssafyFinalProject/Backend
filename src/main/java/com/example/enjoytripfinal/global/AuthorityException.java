@@ -8,4 +8,8 @@ public class AuthorityException extends AuthenticationException {
     public AuthorityException() {
         super(MESSAGE);
     }
+
+    public AuthorityException(String message) {
+        super(message);
+    }
 }
