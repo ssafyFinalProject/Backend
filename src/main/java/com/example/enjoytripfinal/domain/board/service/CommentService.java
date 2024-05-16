@@ -43,8 +43,13 @@ public class CommentService {
         return mapper.entityToCommentResponse(comment);
     }
 
+    @Transactional
     public CommentResponse updateComment(UpdateCommentRequest request) {
+        Comment comment = commentRepository.findById(request.getCommentId()).orElseThrow(EntityNotFoundException::new);
 
+        comment.updateComment(request.getContent());
+
+        return mapper.entityToCommentResponse(comment);
     }
 
     public void deleteComment(UUID id) {

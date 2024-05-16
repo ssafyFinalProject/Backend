@@ -33,4 +33,5 @@ public class CommentController {
     public ResponseEntity<CommentResponse> updateComment(@RequestBody UpdateCommentRequest request) {
         return ResponseEntity.ok(commentService.updateComment(request));
     }
+
 }

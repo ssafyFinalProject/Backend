@@ -31,6 +31,10 @@ public class Comment {
         this.content = content;
     }
 
+    public void updateComment(String content) {
+        this.content = content;
+    }
+
     public void setBoard(Board board) {
         this.board = board;
         board.getCommentList().add(this);
