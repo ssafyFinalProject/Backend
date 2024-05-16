@@ -26,4 +26,18 @@ public class Comment {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "board_id")
     public Board board;
+
+    public Comment(String content) {
+        this.content = content;
+    }
+
+    public void setBoard(Board board) {
+        this.board = board;
+        board.getCommentList().add(this);
+    }
+
+    public void setMember(Member member) {
+        this.member = member;
+        member.getCommentList().add(this);
+    }
 }

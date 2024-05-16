@@ -1,19 +1,21 @@
 package com.example.enjoytripfinal.domain.board.mapper;
 
 import com.example.enjoytripfinal.domain.board.dto.request.MakeBoardRequest;
+import com.example.enjoytripfinal.domain.board.dto.request.WriteCommentRequest;
 import com.example.enjoytripfinal.domain.board.dto.response.BoardDetailResponse;
 import com.example.enjoytripfinal.domain.board.dto.response.BoardResponse;
 import com.example.enjoytripfinal.domain.board.dto.response.CommentResponse;
 import com.example.enjoytripfinal.domain.board.entity.Board;
 import com.example.enjoytripfinal.domain.board.entity.Comment;
 import com.example.enjoytripfinal.domain.member.dto.response.MemberLightResponse;
+import com.example.enjoytripfinal.domain.member.entity.Member;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Component
-public class BoardMapper {
+public class BoardCommentMapper {
 
     public Board dtoToBoardEntity(MakeBoardRequest request) {
         return new Board(
@@ -34,7 +36,13 @@ public class BoardMapper {
                 )
         );
     }
+    public Comment dtoToCommentEntity(WriteCommentRequest request, Member member, Board board) {
+        Comment comment = new Comment(request.getContent());
+        comment.setBoard(board);
+        comment.setMember(member);
 
+        return comment;
+    }
     public CommentResponse entityToCommentResponse(Comment comment) {
         return new CommentResponse(
                 comment.getId(),

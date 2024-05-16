@@ -1,6 +1,7 @@
 package com.example.enjoytripfinal.domain.member.entity;
 
 import com.example.enjoytripfinal.domain.board.entity.Board;
+import com.example.enjoytripfinal.domain.board.entity.Comment;
 import com.github.f4b6a3.ulid.UlidCreator;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
@@ -29,6 +30,9 @@ public class Member {
 
     @OneToMany(mappedBy = "member", cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.LAZY)
     private List<Board> boardList = new ArrayList<>();
+
+    @OneToMany(mappedBy = "member", cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.LAZY)
+    private List<Comment> commentList = new ArrayList<>();
 
     public Member(String email,String password,String nickName,Role role) {
         this.email = email;
