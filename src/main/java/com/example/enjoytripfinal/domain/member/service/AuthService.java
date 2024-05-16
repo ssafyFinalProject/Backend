@@ -14,6 +14,7 @@ import com.example.enjoytripfinal.domain.member.mapper.MemberMapper;
 import com.example.enjoytripfinal.domain.member.repository.MemberRepository;
 import com.example.enjoytripfinal.domain.member.repository.RefreshTokenRepository;
 import com.example.enjoytripfinal.global.AuthorityException;
+import com.example.enjoytripfinal.global.RefreshTokenInfoMismatchException;
 import com.example.enjoytripfinal.global.RefreshTokenValidationException;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -84,8 +85,8 @@ public class AuthService {
 
     public String makeAccessToken(final Authentication auth, final String refreshToken) {
         String userInfo = auth.getName();
-        if(!getRefreshTokenValue(refreshToken).equals(userInfo)) {
-            throw new RefreshTokenValidationException();
+        if(!getRefreshTokenValue(userInfo).equals(refreshToken)) {
+            throw new RefreshTokenInfoMismatchException();
         }
 
         return tokenProvider.createAccessToken(auth);
