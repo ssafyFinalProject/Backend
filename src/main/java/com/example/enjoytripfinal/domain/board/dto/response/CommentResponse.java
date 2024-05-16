@@ -10,10 +10,9 @@ import java.util.UUID;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public class BoardResponse {
+public class CommentResponse {
+    private UUID commentId;
     private UUID boardId;
-    private String title;
     private String content;
-    private Long view;
     private MemberLightResponse member;
 }
