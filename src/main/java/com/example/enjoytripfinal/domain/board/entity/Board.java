@@ -37,6 +37,12 @@ public class Board {
     @BatchSize(size = 10)
     private List<Comment> commentList = new ArrayList<>();
 
+    public Board(String title,String content) {
+        this.title = title;
+        this.content = content;
+        this.view = 0l;
+    }
+
     public void setMappingMember(Member member) {
         this.member = member;
     }

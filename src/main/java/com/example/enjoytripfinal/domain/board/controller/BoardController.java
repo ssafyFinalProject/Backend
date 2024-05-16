@@ -17,7 +17,9 @@ public class BoardController {
 
     @PostMapping
     public ResponseEntity<BoardResponse> makeBoard(@RequestBody MakeBoardRequest request) {
-        return ResponseEntity.ok().build();
+        return ResponseEntity.ok(boardService.makeBoard(request));
     }
+
+
 
 }

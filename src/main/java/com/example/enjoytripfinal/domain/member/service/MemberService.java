@@ -36,7 +36,11 @@ public class MemberService {
         return memberRepository.findByNickName(nickname).orElseThrow(EntityNotFoundException::new);
     }
 
-    public UUID getMemberIdValue() {
+    public Member getMemberByJwt() {
+        return memberRepository.findById(getMemberIdValue()).orElseThrow(EntityNotFoundException::new);
+    }
+
+    private UUID getMemberIdValue() {
         return UUID.fromString(SecurityContextHolder.getContext().getAuthentication().getName());
     }
 
