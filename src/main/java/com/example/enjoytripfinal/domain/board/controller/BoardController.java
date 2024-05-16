@@ -4,6 +4,7 @@ import com.example.enjoytripfinal.domain.board.dto.request.MakeBoardRequest;
 import com.example.enjoytripfinal.domain.board.dto.request.UpdateBoardRequest;
 import com.example.enjoytripfinal.domain.board.dto.response.BoardDetailResponse;
 import com.example.enjoytripfinal.domain.board.dto.response.BoardResponse;
+import com.example.enjoytripfinal.domain.board.dto.response.CommentResponse;
 import com.example.enjoytripfinal.domain.board.service.BoardService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

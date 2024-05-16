@@ -1,5 +1,6 @@
 package com.example.enjoytripfinal.domain.board.service;
 
+import com.example.enjoytripfinal.domain.board.dto.request.UpdateCommentRequest;
 import com.example.enjoytripfinal.domain.board.dto.request.WriteCommentRequest;
 import com.example.enjoytripfinal.domain.board.dto.response.CommentResponse;
 import com.example.enjoytripfinal.domain.board.entity.Board;
@@ -12,6 +13,8 @@ import com.example.enjoytripfinal.domain.member.service.MemberService;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.UUID;
 
 @Service
 public class CommentService {
@@ -38,5 +41,13 @@ public class CommentService {
         commentRepository.save(comment);
 
         return mapper.entityToCommentResponse(comment);
+    }
+
+    public CommentResponse updateComment(UpdateCommentRequest request) {
+
+    }
+
+    public void deleteComment(UUID id) {
+        commentRepository.deleteById(id);
     }
 }
