@@ -18,4 +18,12 @@ public interface PlaceRepository extends JpaRepository<Place, UUID> {
 
     @Query(value = "SELECT p FROM Place p WHERE p.roadAddress like %:roadAddress%")
     List<Place> findAllByRoadAddress(@Param("roadAddress") String roadAddress);
+
+    @Query("SELECT p FROM Place p " +
+            "WHERE (:name IS NULL OR p.name LIKE %:name%) " +
+            "AND (:category IS NULL OR p.category = :category) " +
+            "AND (:roadAddress IS NULL OR p.roadAddress LIKE %:roadAddress%)")
+    List<Place> findAllByDetail(@Param("name") String name,
+                             @Param("category") Category category,
+                             @Param("roadAddress") String roadAddress);
 }

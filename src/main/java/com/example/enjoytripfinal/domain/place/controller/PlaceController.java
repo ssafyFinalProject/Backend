@@ -1,13 +1,11 @@
 package com.example.enjoytripfinal.domain.place.controller;
 
+import com.example.enjoytripfinal.domain.place.dto.request.PlaceRequest;
 import com.example.enjoytripfinal.domain.place.dto.response.PlaceResponse;
 import com.example.enjoytripfinal.domain.place.repository.PlaceRepository;
 import com.example.enjoytripfinal.domain.place.service.PlaceService;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -33,5 +31,10 @@ public class PlaceController {
     @GetMapping("/road")
     public ResponseEntity<List<PlaceResponse>> findPlaceListByRoadAddress(@RequestParam("roadAddress") String roadAddress) {
         return ResponseEntity.ok(placeService.findPlaceListByRoadAddress(roadAddress));
+    }
+
+    @GetMapping
+    public ResponseEntity<List<PlaceResponse>> findPlaceByDetail(@RequestBody PlaceRequest request) {
+        return ResponseEntity.ok(placeService.findPlaceByDetail(request));
     }
 }

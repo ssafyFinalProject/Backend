@@ -1,8 +1,8 @@
 package com.example.enjoytripfinal.domain.place.service;
 
+import com.example.enjoytripfinal.domain.place.dto.request.PlaceRequest;
 import com.example.enjoytripfinal.domain.place.dto.response.PlaceResponse;
 import com.example.enjoytripfinal.domain.place.entity.Category;
-import com.example.enjoytripfinal.domain.place.entity.Place;
 import com.example.enjoytripfinal.domain.place.mapper.PlaceMapper;
 import com.example.enjoytripfinal.domain.place.repository.PlaceRepository;
 
@@ -37,6 +37,10 @@ public class PlaceService {
     @Transactional(readOnly = true)
     public List<PlaceResponse> findPlaceListByRoadAddress(String roadAddress) {
         return placeRepository.findAllByRoadAddress(roadAddress).stream().map(placeMapper::entityToResponse).toList();
+    }
+
+    public List<PlaceResponse> findPlaceByDetail(PlaceRequest request) {
+        return placeRepository.findAllByDetail(request.getName(),request.getCategory(),request.getRoadAddress()).stream().map(placeMapper::entityToResponse).toList();
     }
 }
 
