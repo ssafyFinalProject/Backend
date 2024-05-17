@@ -2,7 +2,6 @@ package com.example.enjoytripfinal.domain.place.controller;
 
 import com.example.enjoytripfinal.domain.place.dto.request.PlaceRequest;
 import com.example.enjoytripfinal.domain.place.dto.response.PlaceResponse;
-import com.example.enjoytripfinal.domain.place.repository.PlaceRepository;
 import com.example.enjoytripfinal.domain.place.service.PlaceService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
