@@ -39,8 +39,8 @@ public class MemberController {
         return ResponseEntity.ok(memberService.updateMember(request));
     }
 
-    @DeleteMapping
-    public ResponseEntity<Void> deleteMember(@RequestParam(name = "id") UUID id) {
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteMember(@PathVariable(name = "id") UUID id) {
         memberService.deleteMember(id);
         return ResponseEntity.ok().build();
     }

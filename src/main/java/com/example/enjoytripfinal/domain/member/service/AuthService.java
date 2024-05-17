@@ -17,7 +17,6 @@ import com.example.enjoytripfinal.global.AuthorityException;
 import com.example.enjoytripfinal.global.RefreshTokenInfoMismatchException;
 import com.example.enjoytripfinal.global.RefreshTokenValidationException;
 import jakarta.persistence.EntityNotFoundException;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

@@ -38,8 +38,8 @@ public class BoardCommentMapper {
     }
     public Comment dtoToCommentEntity(WriteCommentRequest request, Member member, Board board) {
         Comment comment = new Comment(request.getContent());
-        comment.setBoard(board);
-        comment.setMember(member);
+        comment.updateBoard(board);
+        comment.updateMember(member);
 
         return comment;
     }

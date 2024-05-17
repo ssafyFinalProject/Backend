@@ -11,6 +11,7 @@ import com.example.enjoytripfinal.domain.member.entity.Member;
 import com.example.enjoytripfinal.domain.member.service.MemberService;
 import com.example.enjoytripfinal.global.AuthorityException;
 import jakarta.persistence.EntityExistsException;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
@@ -42,7 +43,7 @@ public class BoardService {
         return boardCommentMapper.entityToResponse(board);
     }
 
-    public Page<BoardResponse> getPageList(Pageable pageable) {
+    public Page<BoardResponse> getBoardPage(Pageable pageable) {
         Page<Board> boardPage = boardRepository.findAllByMember(pageable);
 
         List<BoardResponse> list = boardPage.getContent()
@@ -53,7 +54,7 @@ public class BoardService {
 
     @Transactional
     public BoardDetailResponse searchBoardById(UUID boardId) {
-        Board board = boardRepository.findBoardWithMemberAndCommentListById(boardId);
+        Board board = boardRepository.findBoardWithMemberAndCommentListById(boardId).orElseThrow(EntityNotFoundException::new);
         board.upViewCount();
         return boardCommentMapper.entityToDetailResponse(board);
     }

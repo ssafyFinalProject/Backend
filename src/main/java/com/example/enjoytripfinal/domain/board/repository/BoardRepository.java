@@ -20,7 +20,7 @@ public interface BoardRepository extends JpaRepository<Board, UUID> {
             "JOIN FETCH b.member " +
             "LEFT JOIN FETCH b.commentList " +
             "WHERE b.id = :id")
-    Board findBoardWithMemberAndCommentListById(@Param("id") UUID id);
+    Optional<Board> findBoardWithMemberAndCommentListById(@Param("id") UUID id);
 
     @Query(value = "SELECT b FROM Board b JOIN FETCH b.member WHERE b.id = :boardID")
     Optional<Board> findByIdWithMember(@Param("boardID") UUID boardID);

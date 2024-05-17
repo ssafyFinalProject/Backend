@@ -33,7 +33,7 @@ public class BoardController {
     public ResponseEntity<Page<BoardResponse>> getBoardList(
             @PageableDefault(size = 10, sort = "id", direction = Sort.Direction.DESC) Pageable pageable
     ) {
-        Page<BoardResponse> list = boardService.getPageList(pageable);
+        Page<BoardResponse> list = boardService.getBoardPage(pageable);
         return ResponseEntity.ok(list);
     }
 
@@ -48,8 +48,8 @@ public class BoardController {
         return ResponseEntity.ok(boardService.updateBoard(request));
     }
 
-    @DeleteMapping
-    public ResponseEntity<Void> deleteBoard(@RequestParam(name = "id") UUID id) {
+    @DeleteMapping("/{boardId}")
+    public ResponseEntity<Void> deleteBoard(@PathVariable(name = "boardId") UUID id) {
         boardService.deleteBoard(id);
         return ResponseEntity.ok().build();
     }

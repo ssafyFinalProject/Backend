@@ -35,12 +35,12 @@ public class Comment {
         this.content = content;
     }
 
-    public void setBoard(Board board) {
+    public void updateBoard(Board board) {
         this.board = board;
         board.getCommentList().add(this);
     }
 
-    public void setMember(Member member) {
+    public void updateMember(Member member) {
         this.member = member;
         member.getCommentList().add(this);
     }
