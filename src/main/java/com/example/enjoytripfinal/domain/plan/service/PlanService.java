@@ -16,13 +16,11 @@ import com.example.enjoytripfinal.domain.plan.repository.PlanRepository;
 import com.example.enjoytripfinal.domain.plan.repository.PostRepository;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.extern.slf4j.Slf4j;
-import org.slf4j.Logger;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.UUID;
 
-@Slf4j
 @Service
 public class PlanService {
     private final PlanRepository planRepository;
