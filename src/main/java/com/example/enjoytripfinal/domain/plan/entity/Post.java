@@ -39,4 +39,8 @@ public class Post {
         this.plan = plan;
         plan.getPosts().add(this);
     }
+
+    public void updatePlace(PostPlace postPlace) {
+        this.postPlaces.add(postPlace);
+    }
 }

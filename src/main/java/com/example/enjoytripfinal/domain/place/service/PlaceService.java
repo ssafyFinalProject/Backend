@@ -3,13 +3,16 @@ package com.example.enjoytripfinal.domain.place.service;
 import com.example.enjoytripfinal.domain.place.dto.request.PlaceRequest;
 import com.example.enjoytripfinal.domain.place.dto.response.PlaceResponse;
 import com.example.enjoytripfinal.domain.place.entity.Category;
+import com.example.enjoytripfinal.domain.place.entity.Place;
 import com.example.enjoytripfinal.domain.place.mapper.PlaceMapper;
 import com.example.enjoytripfinal.domain.place.repository.PlaceRepository;
 
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.UUID;
 
 @Service
 public class PlaceService {
@@ -41,6 +44,10 @@ public class PlaceService {
 
     public List<PlaceResponse> findPlaceByDetail(PlaceRequest request) {
         return placeRepository.findAllByDetail(request.getName(),request.getCategory(),request.getRoadAddress()).stream().map(placeMapper::entityToResponse).toList();
+    }
+
+    public Place findPlaceById(UUID id) {
+        return placeRepository.findById(id).orElseThrow(EntityNotFoundException::new);
     }
 }
 

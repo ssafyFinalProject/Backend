@@ -28,6 +28,5 @@ public class PostPlace {
     public PostPlace(Place place, Post post) {
         this.place = place;
         this.post = post;
-        post.getPostPlaces().add(this);
     }
 }

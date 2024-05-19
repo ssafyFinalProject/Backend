@@ -1,6 +1,7 @@
 package com.example.enjoytripfinal.domain.plan.controller;
 
 import com.example.enjoytripfinal.domain.plan.dto.request.MakePlanRequest;
+import com.example.enjoytripfinal.domain.plan.dto.request.MakePostRequest;
 import com.example.enjoytripfinal.domain.plan.dto.response.PlanResponse;
 import com.example.enjoytripfinal.domain.plan.service.PlanService;
 import org.springframework.http.ResponseEntity;
@@ -21,5 +22,11 @@ public class PlanController {
     @PostMapping
     public ResponseEntity<PlanResponse> savePlan(@RequestBody MakePlanRequest request) {
         return ResponseEntity.ok(planService.makePlan(request));
+    }
+
+    @PostMapping("/post")
+    public  ResponseEntity<Void> addPost(@RequestBody MakePostRequest request) {
+        planService.addPost(request);
+        return ResponseEntity.ok().build();
     }
 }

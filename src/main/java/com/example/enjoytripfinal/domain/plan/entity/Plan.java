@@ -9,6 +9,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.BatchSize;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -26,7 +27,7 @@ public class Plan {
 
     private String content;
 
-    private LocalDateTime planDay;
+    private LocalDate planDay;
 
     @OneToMany(mappedBy = "plan", cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.LAZY)
     @BatchSize(size = 10)
@@ -36,7 +37,7 @@ public class Plan {
     @JoinColumn(columnDefinition = "BINARY(16)", name = "member_id")
     private Member member;
 
-    public Plan(String name,String content,LocalDateTime planDay) {
+    public Plan(String name, String content, LocalDate planDay) {
         this.name = name;
         this.content = content;
         this.planDay = planDay;
