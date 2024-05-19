@@ -26,9 +26,9 @@ public class Post {
     @ManyToOne
     private Plan plan;
 
-    @OneToMany(mappedBy = "post", cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.LAZY)
-    @BatchSize(size = 10)
-    private List<PostPlace> postPlaces = new ArrayList<>();
+    @JoinColumn(columnDefinition = "BINARY(16)", name = "place_id")
+    @OneToOne
+    private PostPlace postPlace;
 
     public Post(String name,String content) {
         this.name = name;
@@ -41,6 +41,6 @@ public class Post {
     }
 
     public void updatePlace(PostPlace postPlace) {
-        this.postPlaces.add(postPlace);
+        this.postPlace = postPlace;
     }
 }

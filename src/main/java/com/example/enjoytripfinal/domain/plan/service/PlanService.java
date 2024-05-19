@@ -7,6 +7,7 @@ import com.example.enjoytripfinal.domain.place.service.PlaceService;
 import com.example.enjoytripfinal.domain.plan.dto.request.MakePlanRequest;
 import com.example.enjoytripfinal.domain.plan.dto.request.MakePostRequest;
 import com.example.enjoytripfinal.domain.plan.dto.response.PlanResponse;
+import com.example.enjoytripfinal.domain.plan.dto.response.PostResponse;
 import com.example.enjoytripfinal.domain.plan.entity.Plan;
 import com.example.enjoytripfinal.domain.plan.entity.Post;
 import com.example.enjoytripfinal.domain.plan.entity.PostPlace;
@@ -15,7 +16,6 @@ import com.example.enjoytripfinal.domain.plan.mapper.PostMapper;
 import com.example.enjoytripfinal.domain.plan.repository.PlanRepository;
 import com.example.enjoytripfinal.domain.plan.repository.PostRepository;
 import jakarta.persistence.EntityNotFoundException;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -57,12 +57,14 @@ public class PlanService {
     }
 
     @Transactional
-    public void addPost(MakePostRequest request) {
+    public PostResponse addPost(MakePostRequest request) {
         Place place = placeService.findPlaceById(request.getPlaceId());
         Plan plan = findPlanById(request.getPlanId());
         Post post = postMapper.toEntity(request,plan);
         post.updatePlace(new PostPlace(place,post));
         postRepository.save(post);
+
+        return postMapper.toPostResponse(post,place);
     }
 
     public Plan findPlanById(UUID id) {
