@@ -51,6 +51,7 @@ public class PlanService {
     @Transactional
     public PlanResponse makePlan(MakePlanRequest request) {
         Member curMember = memberService.getMemberByJwt();
+
         Plan plan = planRepository.save(planMapper.toPlanEntity(request));
         plan.updateMember(curMember);
 
