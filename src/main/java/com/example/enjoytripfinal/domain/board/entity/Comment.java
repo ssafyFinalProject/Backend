@@ -42,6 +42,6 @@ public class Comment {
 
     public void updateMember(Member member) {
         this.member = member;
-        member.getCommentList().add(this);
+        member.getComments().add(this);
     }
 }
