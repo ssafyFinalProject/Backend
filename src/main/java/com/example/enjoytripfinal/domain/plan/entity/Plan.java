@@ -43,6 +43,12 @@ public class Plan {
         this.planDay = planDay;
     }
 
+    public void updatePlan(String name, String content, LocalDate planDay) {
+        this.name = name;
+        this.content = content;
+        this.planDay = planDay;
+    }
+
     public void updateMember(Member member) {
         member.getPlans().add(this);
         this.member = member;

@@ -6,11 +6,13 @@ import com.example.enjoytripfinal.domain.place.entity.Place;
 import com.example.enjoytripfinal.domain.place.service.PlaceService;
 import com.example.enjoytripfinal.domain.plan.dto.request.MakePlanRequest;
 import com.example.enjoytripfinal.domain.plan.dto.request.MakePostRequest;
+import com.example.enjoytripfinal.domain.plan.dto.request.UpdatePlanRequest;
+import com.example.enjoytripfinal.domain.plan.dto.request.UpdatePostRequest;
+import com.example.enjoytripfinal.domain.plan.dto.response.PlanDetailResponse;
 import com.example.enjoytripfinal.domain.plan.dto.response.PlanResponse;
 import com.example.enjoytripfinal.domain.plan.dto.response.PostResponse;
 import com.example.enjoytripfinal.domain.plan.entity.Plan;
 import com.example.enjoytripfinal.domain.plan.entity.Post;
-import com.example.enjoytripfinal.domain.plan.entity.PostPlace;
 import com.example.enjoytripfinal.domain.plan.mapper.PlanMapper;
 import com.example.enjoytripfinal.domain.plan.mapper.PostMapper;
 import com.example.enjoytripfinal.domain.plan.repository.PlanRepository;
@@ -19,6 +21,7 @@ import jakarta.persistence.EntityNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -27,7 +30,6 @@ public class PlanService {
     private final PostRepository postRepository;
     private final PlaceService placeService;
     private final PlanMapper planMapper;
-
     private final PostMapper postMapper;
     private final MemberService memberService;
 
@@ -56,18 +58,53 @@ public class PlanService {
         return planMapper.toPlanResponse(plan);
     }
 
+    public PlanDetailResponse getPlanById(UUID id) {
+        return planMapper.toPlanDetailResponse(planRepository.findById(id).orElseThrow(EntityNotFoundException::new));
+    }
+
     @Transactional
     public PostResponse addPost(MakePostRequest request) {
         Place place = placeService.findPlaceById(request.getPlaceId());
         Plan plan = findPlanById(request.getPlanId());
         Post post = postMapper.toEntity(request,plan);
-        post.updatePlace(new PostPlace(place,post));
+        post.updatePlace(place);
         postRepository.save(post);
 
         return postMapper.toPostResponse(post,place);
     }
 
+    public List<PlanResponse> getMyPlanList() {
+        Member curMember = memberService.getMemberByJwt();
+        return curMember.getPlans().stream().map(planMapper::toPlanResponse).toList();
+    }
+
     public Plan findPlanById(UUID id) {
         return planRepository.findById(id).orElseThrow(EntityNotFoundException::new);
+    }
+
+    @Transactional
+    public PlanResponse updatePlan(UpdatePlanRequest request) {
+        Plan plan = planRepository.findById(request.getPlanId()).orElseThrow(EntityNotFoundException::new);
+        plan.updatePlan(request.getName(),request.getContent(),request.getPlanDay());
+
+        return planMapper.toPlanResponse(plan);
+    }
+
+    @Transactional
+    public PostResponse updatePost(UpdatePostRequest request) {
+        Post post = postRepository.findById(request.getPostId()).orElseThrow(EntityNotFoundException::new);
+        Place place = placeService.findPlaceById(request.getPlaceId());
+
+        post.updatePost(request.getName(),request.getContent(),request.getPostDay(),place);
+
+        return postMapper.toPostResponse(post,place);
+    }
+
+    public void deletePlan(UUID id) {
+        planRepository.deleteById(id);
+    }
+
+    public void deletePost(UUID id) {
+        postRepository.deleteById(id);
     }
 }
