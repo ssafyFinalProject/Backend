@@ -22,6 +22,7 @@ public class PostMapper {
                 post.getName(),
                 post.getContent(),
                 new PlaceResponse(
+                        place.getId(),
                         place.getName(),
                         place.getCategory(),
                         place.getRoadAddress(),

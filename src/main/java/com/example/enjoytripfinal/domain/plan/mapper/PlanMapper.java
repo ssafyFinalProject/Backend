@@ -36,6 +36,7 @@ public class PlanMapper {
                     post.getName(),
                     post.getContent(),
                     new PlaceResponse(
+                            curPlace.getId(),
                             curPlace.getName(),
                             curPlace.getCategory(),
                             curPlace.getRoadAddress(),
