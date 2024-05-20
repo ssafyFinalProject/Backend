@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
 import java.util.UUID;
 
 @Getter
@@ -16,4 +17,5 @@ public class BoardResponse {
     private String content;
     private Long view;
     private MemberLightResponse member;
+    private LocalDate date;
 }

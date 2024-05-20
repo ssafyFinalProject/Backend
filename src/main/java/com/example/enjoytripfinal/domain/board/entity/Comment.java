@@ -7,6 +7,7 @@ import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
 import java.util.UUID;
 
 @Entity
@@ -19,6 +20,8 @@ public class Comment {
 
     private String content;
 
+    private LocalDate date;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id")
     public Member member;
@@ -29,6 +32,7 @@ public class Comment {
 
     public Comment(String content) {
         this.content = content;
+        this.date = LocalDate.now();
     }
 
     public void updateComment(String content) {
