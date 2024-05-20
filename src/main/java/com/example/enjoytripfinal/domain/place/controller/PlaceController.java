@@ -4,7 +4,6 @@ import com.example.enjoytripfinal.domain.place.dto.request.PickPlaceRequest;
 import com.example.enjoytripfinal.domain.place.dto.request.PlaceRequest;
 import com.example.enjoytripfinal.domain.place.dto.response.PlaceResponse;
 import com.example.enjoytripfinal.domain.place.service.PlaceService;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
