@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.ColumnDefault;
 
 import java.util.UUID;
 
@@ -23,6 +24,7 @@ public class Place {
     private Double latitude;
     private Double longitude;
 
+    @ColumnDefault("0")
     private Long like;
 
     public Place(String name,Category category,String roadAddress,String address,Double latitude,Double longitude) {
