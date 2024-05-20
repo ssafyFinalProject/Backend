@@ -1,7 +1,6 @@
 package com.example.enjoytripfinal.domain.plan.entity;
 
 import com.example.enjoytripfinal.domain.member.entity.Member;
-import com.example.enjoytripfinal.domain.place.entity.Place;
 import com.github.f4b6a3.ulid.UlidCreator;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
@@ -10,7 +9,6 @@ import lombok.NoArgsConstructor;
 import org.hibernate.annotations.BatchSize;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;

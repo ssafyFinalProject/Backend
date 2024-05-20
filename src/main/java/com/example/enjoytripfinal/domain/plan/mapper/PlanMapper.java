@@ -1,6 +1,7 @@
 package com.example.enjoytripfinal.domain.plan.mapper;
 
 import com.example.enjoytripfinal.domain.place.dto.response.PlaceResponse;
+import com.example.enjoytripfinal.domain.place.entity.Place;
 import com.example.enjoytripfinal.domain.plan.dto.request.MakePlanRequest;
 import com.example.enjoytripfinal.domain.plan.dto.response.PlanDetailResponse;
 import com.example.enjoytripfinal.domain.plan.dto.response.PlanResponse;
@@ -11,6 +12,7 @@ import com.example.enjoytripfinal.domain.plan.entity.Post;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @Component
 public class PlanMapper {
@@ -24,19 +26,22 @@ public class PlanMapper {
     }
 
     public PlanDetailResponse toPlanDetailResponse(Plan plan) {
-        ArrayList<PostResponse> posts = new ArrayList<>();
+        List<PostResponse> posts = new ArrayList<>();
         for(Post post : plan.getPosts()) {
+
+            Place curPlace = post.getPlace();
+
             posts.add(new PostResponse(
                     post.getId(),
                     post.getName(),
                     post.getContent(),
                     new PlaceResponse(
-                            post.getPlace().getName(),
-                            post.getPlace().getCategory(),
-                            post.getPlace().getRoadAddress(),
-                            post.getPlace().getAddress(),
-                            post.getPlace().getLatitude(),
-                            post.getPlace().getLongitude()
+                            curPlace.getName(),
+                            curPlace.getCategory(),
+                            curPlace.getRoadAddress(),
+                            curPlace.getAddress(),
+                            curPlace.getLatitude(),
+                            curPlace.getLongitude()
                     )
             ));
         }

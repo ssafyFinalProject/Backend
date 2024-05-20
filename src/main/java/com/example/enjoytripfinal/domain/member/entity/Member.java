@@ -2,6 +2,7 @@ package com.example.enjoytripfinal.domain.member.entity;
 
 import com.example.enjoytripfinal.domain.board.entity.Board;
 import com.example.enjoytripfinal.domain.board.entity.Comment;
+import com.example.enjoytripfinal.domain.place.entity.Place;
 import com.example.enjoytripfinal.domain.plan.entity.Plan;
 import com.github.f4b6a3.ulid.UlidCreator;
 import jakarta.persistence.*;
