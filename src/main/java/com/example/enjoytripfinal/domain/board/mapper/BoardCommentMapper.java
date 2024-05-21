@@ -37,11 +37,8 @@ public class BoardCommentMapper {
                 board.getDate()
         );
     }
-    public Comment dtoToCommentEntity(WriteCommentRequest request, Member member, Board board) {
+    public Comment dtoToCommentEntity(WriteCommentRequest request) {
         Comment comment = new Comment(request.getContent());
-        comment.updateBoard(board);
-        comment.updateMember(member);
-
         return comment;
     }
     public CommentResponse entityToCommentResponse(Comment comment) {
