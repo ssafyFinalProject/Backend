@@ -36,9 +36,10 @@ public class CommentService {
         Member curMember = memberService.getMemberByJwt();
         Board board = boardRepository.findById(request.getBoardId()).orElseThrow(EntityNotFoundException::new);
 
-        Comment comment = mapper.dtoToCommentEntity(request,curMember,board);
+        Comment comment = commentRepository.save(mapper.dtoToCommentEntity(request));
 
-        commentRepository.save(comment);
+        comment.updateBoard(board);
+        comment.updateMember(curMember);
 
         return mapper.entityToCommentResponse(comment);
     }
