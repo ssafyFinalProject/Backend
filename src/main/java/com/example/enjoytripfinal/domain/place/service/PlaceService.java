@@ -13,6 +13,7 @@ import com.example.enjoytripfinal.domain.place.repository.PlaceMemberRepository;
 import com.example.enjoytripfinal.domain.place.repository.PlaceRepository;
 
 import jakarta.persistence.EntityNotFoundException;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -20,6 +21,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 import java.util.UUID;
 
+@Slf4j
 @Service
 public class PlaceService {
     private final PlaceRepository placeRepository;
@@ -38,11 +40,13 @@ public class PlaceService {
     @Transactional(readOnly = true)
     public List<PlaceResponse> findPlaceListByCategory(String categoryName) {
         Category category = Category.toCategory(categoryName);
+        log.info(categoryName);
         return placeRepository.findAllByCategory(category).stream().map(placeMapper::entityToResponse).toList();
     }
 
     @Transactional(readOnly = true)
     public List<PlaceResponse> findPlaceListByName(String placeName) {
+
         return placeRepository.findAllByName(placeName).stream().map(placeMapper::entityToResponse).toList();
     }
 
