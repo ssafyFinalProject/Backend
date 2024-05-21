@@ -1,4 +1,105 @@
+DROP DATABASE IF EXISTS SSAFY;
+CREATE DATABASE SSAFY;
 USE SSAFY;
+
+create table if not exists member
+(
+    id        binary(16)                       not null
+        primary key,
+    email     varchar(255)                     null,
+    nick_name varchar(255)                     null,
+    password  varchar(255)                     null,
+    role      enum ('ROLE_ADMIN', 'ROLE_USER') null
+);
+
+create table if not exists board
+(
+    date      datetime(6)  null,
+    view      bigint       null,
+    id        binary(16)   not null
+        primary key,
+    member_id binary(16)   null,
+    content   varchar(255) null,
+    title     varchar(255) null,
+    constraint FKtnnhjk31xqxoon8krym5r0k0d
+        foreign key (member_id) references member (id)
+);
+
+create table if not exists comment
+(
+    date      datetime(6)  null,
+    board_id  binary(16)   null,
+    id        binary(16)   not null
+        primary key,
+    member_id binary(16)   null,
+    content   varchar(255) null,
+    constraint FK4whs59b3budbdjmtlu514w06q
+        foreign key (member_id) references member (id),
+    constraint FKlij9oor1nav89jeat35s6kbp1
+        foreign key (board_id) references board (id)
+);
+
+create table if not exists place
+(
+    latitude     double                                        null,
+    longitude    double                                        null,
+    `like`       bigint default 0                              null,
+    id           binary(16)                                    not null
+        primary key,
+    address      varchar(255)                                  null,
+    img          varchar(255)                                  null,
+    name         varchar(255)                                  null,
+    road_address varchar(255)                                  null,
+    category     enum ('TRAVEL', 'RESTAURANT', 'ACCOMODATION') null
+);
+
+create table if not exists place_member
+(
+    id        binary(16) not null
+        primary key,
+    member_id binary(16) null,
+    place_id  binary(16) null,
+    constraint FKnys9psbfne7mcmsc8hpa3x23s
+        foreign key (member_id) references member (id),
+    constraint FKpb44438oype9bhjk8ir068y04
+        foreign key (place_id) references place (id)
+);
+
+create table if not exists refresh_token
+(
+    id          binary(16)   not null
+        primary key,
+    token_key   varchar(255) null,
+    token_value varchar(255) null
+);
+
+create table if not exists plan
+(
+    plan_day  date         null,
+    id        binary(16)   not null
+        primary key,
+    member_id binary(16)   null,
+    content   varchar(255) null,
+    name      varchar(255) null,
+    constraint FKsq1x8v1wnado7uc31uei0rvl1
+        foreign key (member_id) references member (id)
+);
+
+create table if not exists post
+(
+    post_day date         null,
+    id       binary(16)   not null
+        primary key,
+    place_id binary(16)   null,
+    plan_id  binary(16)   null,
+    content  varchar(255) null,
+    name     varchar(255) null,
+    constraint FKgy7pmmnw4nxp6qxydolxuuni2
+        foreign key (plan_id) references plan (id),
+    constraint FKhvpk8knblmoxs81ov30c3y9vw
+        foreign key (place_id) references place (id)
+);
+
 
 INSERT INTO SSAFY.place (id,name, category, road_address, address, latitude, longitude, img) VALUES
                                                                                             (UUID_TO_BIN(UUID()),'일제 경성호국신사 계단(108계단)', 'TRAVEL', '서울특별시 용산구 신흥로22가길 33', '서울특별시 용산구 용산동2가 1-346', 37.546023, 126.982542,'https://search.pstatic.net/common/?src=https%3A%2F%2Fpup-review-phinf.pstatic.net%2FMjAyNDAzMjlfNjQg%2FMDAxNzExNjg5MjAxMDAx.z1Ttl3osTik_X58uD-i5yIsezxR3t156ctVhhH-W_ssg.AUxkdYtOsPKNcUVf-y76asIZyu_6L_t3wZvVSF5s-x0g.JPEG%2F0564148E-FBE9-468F-997F-F6D92AC0EC37.jpeg%3Ftype%3Dw1500_60_sharpen'),
