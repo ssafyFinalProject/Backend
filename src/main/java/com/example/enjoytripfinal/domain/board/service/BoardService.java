@@ -2,6 +2,7 @@ package com.example.enjoytripfinal.domain.board.service;
 
 import com.example.enjoytripfinal.domain.board.dto.request.MakeBoardRequest;
 import com.example.enjoytripfinal.domain.board.dto.request.UpdateBoardRequest;
+import com.example.enjoytripfinal.domain.board.dto.response.BoardCount;
 import com.example.enjoytripfinal.domain.board.dto.response.BoardDetailResponse;
 import com.example.enjoytripfinal.domain.board.dto.response.BoardResponse;
 import com.example.enjoytripfinal.domain.board.entity.Board;
@@ -30,6 +31,10 @@ public class BoardService {
         this.boardRepository = boardRepository;
         this.boardCommentMapper = boardCommentMapper;
         this.memberService = memberService;
+    }
+
+    public BoardCount getBoardCount() {
+        return new BoardCount(boardRepository.count());
     }
 
     @Transactional
