@@ -2,6 +2,7 @@ package com.example.enjoytripfinal.domain.board.service;
 
 import com.example.enjoytripfinal.domain.board.dto.request.MakeBoardRequest;
 import com.example.enjoytripfinal.domain.board.dto.request.UpdateBoardRequest;
+import com.example.enjoytripfinal.domain.board.dto.response.BoardCount;
 import com.example.enjoytripfinal.domain.board.dto.response.BoardDetailResponse;
 import com.example.enjoytripfinal.domain.board.dto.response.BoardResponse;
 import com.example.enjoytripfinal.domain.board.entity.Board;
@@ -12,9 +13,7 @@ import com.example.enjoytripfinal.domain.member.service.MemberService;
 import com.example.enjoytripfinal.global.AuthorityException;
 import jakarta.persistence.EntityExistsException;
 import jakarta.persistence.EntityNotFoundException;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
-import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.*;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -34,6 +33,10 @@ public class BoardService {
         this.memberService = memberService;
     }
 
+    public BoardCount getBoardCount() {
+        return new BoardCount(boardRepository.count());
+    }
+
     @Transactional
     public BoardResponse makeBoard(MakeBoardRequest request) {
         Board board = boardCommentMapper.dtoToBoardEntity(request);
@@ -50,6 +53,14 @@ public class BoardService {
                 .stream().map(boardCommentMapper::entityToResponse).collect(Collectors.toList());
 
         return new PageImpl<>(list,pageable, boardPage.getTotalElements());
+    }
+
+    @Transactional(readOnly = true)
+    public List<BoardResponse> selectBoardPage(Integer pageNum) {
+        Pageable pageable = PageRequest.of(pageNum, 10, Sort.by(Sort.Direction.DESC));
+        Page<Board> pages = boardRepository.findAllByMember(pageable);
+
+        return pages.getContent().stream().map(boardCommentMapper::entityToResponse).toList();
     }
 
     @Transactional
@@ -74,7 +85,11 @@ public class BoardService {
         return boardCommentMapper.entityToResponse(board);
     }
 
+
+
     public void deleteBoard(UUID id) {
         boardRepository.deleteById(id);
     }
+
+
 }

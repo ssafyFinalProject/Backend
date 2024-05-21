@@ -2,6 +2,7 @@ package com.example.enjoytripfinal.domain.board.controller;
 
 import com.example.enjoytripfinal.domain.board.dto.request.MakeBoardRequest;
 import com.example.enjoytripfinal.domain.board.dto.request.UpdateBoardRequest;
+import com.example.enjoytripfinal.domain.board.dto.response.BoardCount;
 import com.example.enjoytripfinal.domain.board.dto.response.BoardDetailResponse;
 import com.example.enjoytripfinal.domain.board.dto.response.BoardResponse;
 import com.example.enjoytripfinal.domain.board.service.BoardService;
@@ -12,6 +13,7 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.UUID;
 
 @RestController
@@ -34,6 +36,16 @@ public class BoardController {
     ) {
         Page<BoardResponse> list = boardService.getBoardPage(pageable);
         return ResponseEntity.ok(list);
+    }
+
+    @GetMapping("/{pageNum}")
+    public ResponseEntity<List<BoardResponse>> selectBoardPage(@PathVariable("pageNum") Integer pageNum) {
+        return ResponseEntity.ok(boardService.selectBoardPage(pageNum));
+    }
+
+    @GetMapping("/count")
+    public ResponseEntity<BoardCount> getBoardCount() {
+        return ResponseEntity.ok(boardService.getBoardCount());
     }
 
     // 보기
