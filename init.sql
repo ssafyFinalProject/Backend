@@ -2,6 +2,7 @@ DROP DATABASE IF EXISTS SSAFY;
 CREATE DATABASE SSAFY CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 USE SSAFY;
 
+
 create table if not exists member
 (
     id        binary(16)                       not null

@@ -28,6 +28,9 @@ public class PlaceMember {
     public PlaceMember(Place place,Member member) {
         this.place = place;
         this.member = member;
+    }
+
+    public void updateMember(Member member) {
         member.getPlaces().add(this);
     }
 }

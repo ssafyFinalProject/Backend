@@ -73,8 +73,8 @@ public class PlaceService {
             return placeMapper.entityToResponse(curPlace);
 
         curPlace.updateLike(false);
-        PlaceMember placeMember = new PlaceMember(curPlace,curMember);
-        placeMemberRepository.save(placeMember);
+        PlaceMember placeMember = placeMemberRepository.save(new PlaceMember(curPlace,curMember));
+        placeMember.updateMember(curMember);
 
         return placeMapper.entityToResponse(curPlace);
     }
