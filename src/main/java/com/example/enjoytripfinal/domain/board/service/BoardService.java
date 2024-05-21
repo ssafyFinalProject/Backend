@@ -12,9 +12,7 @@ import com.example.enjoytripfinal.domain.member.service.MemberService;
 import com.example.enjoytripfinal.global.AuthorityException;
 import jakarta.persistence.EntityExistsException;
 import jakarta.persistence.EntityNotFoundException;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
-import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.*;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -52,6 +50,14 @@ public class BoardService {
         return new PageImpl<>(list,pageable, boardPage.getTotalElements());
     }
 
+    @Transactional(readOnly = true)
+    public List<BoardResponse> selectBoardPage(Integer pageNum) {
+        Pageable pageable = PageRequest.of(pageNum, 10, Sort.by(Sort.Direction.DESC));
+        Page<Board> pages = boardRepository.findAllByMember(pageable);
+
+        return pages.getContent().stream().map(boardCommentMapper::entityToResponse).toList();
+    }
+
     @Transactional
     public BoardDetailResponse searchBoardById(UUID boardId) {
         Board board = boardRepository.findBoardWithMemberAndCommentListById(boardId).orElseThrow(EntityNotFoundException::new);
@@ -74,7 +80,11 @@ public class BoardService {
         return boardCommentMapper.entityToResponse(board);
     }
 
+
+
     public void deleteBoard(UUID id) {
         boardRepository.deleteById(id);
     }
+
+
 }
