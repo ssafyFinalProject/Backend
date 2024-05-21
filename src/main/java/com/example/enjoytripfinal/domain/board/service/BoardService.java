@@ -57,7 +57,7 @@ public class BoardService {
 
     @Transactional(readOnly = true)
     public List<BoardResponse> selectBoardPage(Integer pageNum) {
-        Pageable pageable = PageRequest.of(pageNum, 10, Sort.by(Sort.Direction.DESC));
+        Pageable pageable = PageRequest.of(pageNum, 10, Sort.by(Sort.Direction.DESC,"date"));
         Page<Board> pages = boardRepository.findAllByMember(pageable);
 
         return pages.getContent().stream().map(boardCommentMapper::entityToResponse).toList();

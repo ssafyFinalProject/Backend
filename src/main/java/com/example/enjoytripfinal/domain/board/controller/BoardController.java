@@ -38,7 +38,7 @@ public class BoardController {
         return ResponseEntity.ok(list);
     }
 
-    @GetMapping("/{pageNum}")
+    @GetMapping("page/{pageNum}")
     public ResponseEntity<List<BoardResponse>> selectBoardPage(@PathVariable("pageNum") Integer pageNum) {
         return ResponseEntity.ok(boardService.selectBoardPage(pageNum));
     }
