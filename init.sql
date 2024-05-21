@@ -47,7 +47,7 @@ create table if not exists place
     id           binary(16)                                    not null
         primary key,
     address      varchar(255)                                  null,
-    img          varchar(255)                                  null,
+    img          varchar(1024)                                  null,
     name         varchar(255)                                  null,
     road_address varchar(255)                                  null,
     category     enum ('TRAVEL', 'RESTAURANT', 'ACCOMODATION') null
