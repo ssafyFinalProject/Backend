@@ -12,16 +12,14 @@ import java.util.UUID;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public class MakePostRequest {
+public class UpdatePlanRequest {
     private UUID planId;
-    private UUID placeId;
     private String name;
     private String content;
-
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @JsonFormat(
             shape = JsonFormat.Shape.STRING,
             pattern = "yyyy-MM-dd",
             timezone = "Asia/Seoul")
-    private LocalDate postDay;
+    private LocalDate planDay;
 }

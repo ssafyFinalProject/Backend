@@ -8,6 +8,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.BatchSize;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -19,13 +20,11 @@ public class Board {
     @Id
     @Column(columnDefinition = "BINARY(16)")
     private UUID id = UlidCreator.getMonotonicUlid().toUuid();
-
     private String title;
-
     private String content;
-
     private Long view;
 
+    private LocalDate date;
     @ManyToOne(
             fetch = FetchType.LAZY,
             cascade = {CascadeType.PERSIST, CascadeType.MERGE}
@@ -41,6 +40,7 @@ public class Board {
         this.title = title;
         this.content = content;
         this.view = 0l;
+        this.date = LocalDate.now();
     }
 
     public void updateBoard(String title, String content) {

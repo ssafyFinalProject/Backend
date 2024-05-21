@@ -1,6 +1,7 @@
 package com.example.enjoytripfinal.domain.member.controller;
 
 import com.example.enjoytripfinal.domain.member.dto.request.UpdateMemberRequest;
+import com.example.enjoytripfinal.domain.member.dto.response.DuplicateEmailResponse;
 import com.example.enjoytripfinal.domain.member.dto.response.DuplicateNicknameResponse;
 import com.example.enjoytripfinal.domain.member.dto.response.MemberResponse;
 import com.example.enjoytripfinal.domain.member.service.MemberService;
@@ -18,11 +19,16 @@ public class MemberController {
         this.memberService = memberService;
     }
 
-    @GetMapping("/duplicate")
+    @GetMapping("/duplicate/nickname")
     public ResponseEntity<DuplicateNicknameResponse> checkDuplicateNickname(@RequestParam(name = "name") String name) {
-
         return ResponseEntity.ok(memberService.checkDuplicateNickname(name));
     }
+
+    @GetMapping("/duplicate/email")
+    public ResponseEntity<DuplicateEmailResponse> checkDuplicateEmail(@RequestParam(name = "email") String email) {
+        return ResponseEntity.ok(memberService.checkDuplicateEmail(email));
+    }
+
 
     @GetMapping
     public ResponseEntity<MemberResponse> getMemberByNickname(@RequestParam(name = "nickname") String nickname){

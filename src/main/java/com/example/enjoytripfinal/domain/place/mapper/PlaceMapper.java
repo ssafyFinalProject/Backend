@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component;
 public class PlaceMapper {
     public PlaceResponse entityToResponse(Place place) {
         return new PlaceResponse(
+                place.getId(),
                 place.getName(),
                 place.getCategory(),
                 place.getRoadAddress(),

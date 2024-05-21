@@ -33,7 +33,8 @@ public class BoardCommentMapper {
                 new MemberLightResponse(
                         board.getMember().getId(),
                         board.getMember().getNickName()
-                )
+                ),
+                board.getDate()
         );
     }
     public Comment dtoToCommentEntity(WriteCommentRequest request, Member member, Board board) {
@@ -51,7 +52,8 @@ public class BoardCommentMapper {
                 new MemberLightResponse(
                         comment.getMember().getId(),
                         comment.getMember().getNickName()
-                )
+                ),
+                comment.getDate()
         );
     }
 

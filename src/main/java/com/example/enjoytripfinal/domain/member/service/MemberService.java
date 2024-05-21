@@ -1,6 +1,7 @@
 package com.example.enjoytripfinal.domain.member.service;
 
 import com.example.enjoytripfinal.domain.member.dto.request.UpdateMemberRequest;
+import com.example.enjoytripfinal.domain.member.dto.response.DuplicateEmailResponse;
 import com.example.enjoytripfinal.domain.member.dto.response.DuplicateNicknameResponse;
 import com.example.enjoytripfinal.domain.member.dto.response.MemberResponse;
 import com.example.enjoytripfinal.domain.member.entity.Member;
@@ -68,5 +69,9 @@ public class MemberService {
 
     public void deleteMember(UUID id) {
         memberRepository.deleteById(id);
+    }
+
+    public DuplicateEmailResponse checkDuplicateEmail(String email) {
+        return new DuplicateEmailResponse(memberRepository.existsByEmail(email));
     }
 }

@@ -12,8 +12,8 @@ import java.util.UUID;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public class MakePostRequest {
-    private UUID planId;
+public class UpdatePostRequest {
+    private UUID postId;
     private UUID placeId;
     private String name;
     private String content;

@@ -2,6 +2,8 @@ package com.example.enjoytripfinal.domain.member.entity;
 
 import com.example.enjoytripfinal.domain.board.entity.Board;
 import com.example.enjoytripfinal.domain.board.entity.Comment;
+import com.example.enjoytripfinal.domain.place.entity.Place;
+import com.example.enjoytripfinal.domain.place.entity.PlaceMember;
 import com.example.enjoytripfinal.domain.plan.entity.Plan;
 import com.github.f4b6a3.ulid.UlidCreator;
 import jakarta.persistence.*;
@@ -37,6 +39,9 @@ public class Member {
 
     @OneToMany(mappedBy = "member", cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.LAZY)
     private List<Plan> plans = new ArrayList<>();
+
+    @OneToMany(mappedBy = "member", cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.LAZY)
+    private List<PlaceMember> places = new ArrayList<>();
 
     public Member(String email,String password,String nickName,Role role) {
         this.email = email;

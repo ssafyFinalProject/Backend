@@ -8,6 +8,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.BatchSize;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -22,17 +23,27 @@ public class Post {
     private String name;
     private String content;
 
+    private LocalDate postDay;
+
     @JoinColumn(columnDefinition = "BINARY(16)", name = "plan_id")
     @ManyToOne
     private Plan plan;
 
     @JoinColumn(columnDefinition = "BINARY(16)", name = "place_id")
-    @OneToOne
-    private PostPlace postPlace;
+    @ManyToOne
+    private Place place;
 
-    public Post(String name,String content) {
+    public Post(String name,String content,LocalDate postDay) {
         this.name = name;
         this.content = content;
+        this.postDay = postDay;
+    }
+
+    public void updatePost(String name,String content,LocalDate postDay,Place place) {
+        this.name = name;
+        this.content = content;
+        this.postDay = postDay;
+        updatePlace(place);
     }
 
     public void updatePlan(Plan plan) {
@@ -40,7 +51,7 @@ public class Post {
         plan.getPosts().add(this);
     }
 
-    public void updatePlace(PostPlace postPlace) {
-        this.postPlace = postPlace;
+    public void updatePlace(Place place) {
+        this.place = place;
     }
 }
