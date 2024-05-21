@@ -55,7 +55,11 @@ public class PlanMapper {
     }
 
     public PlanResponse toPlanResponse(Plan plan) {
-        return new PlanResponse();
+        return new PlanResponse(
+                plan.getId(),
+                plan.getName(),
+                plan.getContent()
+        );
     }
 
 }
