@@ -4,14 +4,17 @@ import com.example.enjoytripfinal.domain.place.dto.request.PickPlaceRequest;
 import com.example.enjoytripfinal.domain.place.dto.request.PlaceRequest;
 import com.example.enjoytripfinal.domain.place.dto.response.PlaceResponse;
 import com.example.enjoytripfinal.domain.place.service.PlaceService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+
 import java.util.List;
 
+@Slf4j
 @RestController
 @RequestMapping("/place")
 public class PlaceController {
@@ -36,7 +39,7 @@ public class PlaceController {
         return ResponseEntity.ok(placeService.findPlaceListByRoadAddress(roadAddress));
     }
 
-    @GetMapping
+    @PostMapping
     public ResponseEntity<List<PlaceResponse>> findPlaceByDetail(@RequestBody PlaceRequest request) {
         return ResponseEntity.ok(placeService.findPlaceByDetail(request));
     }
