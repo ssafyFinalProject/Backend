@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 import org.hibernate.annotations.BatchSize;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -23,8 +24,7 @@ public class Board {
     private String title;
     private String content;
     private Long view;
-
-    private LocalDate date;
+    private LocalDateTime date;
     @ManyToOne(
             fetch = FetchType.LAZY,
             cascade = {CascadeType.PERSIST, CascadeType.MERGE}
@@ -40,7 +40,7 @@ public class Board {
         this.title = title;
         this.content = content;
         this.view = 0l;
-        this.date = LocalDate.now();
+        this.date = LocalDateTime.now();
     }
 
     public void updateBoard(String title, String content) {

@@ -11,6 +11,8 @@ import com.example.enjoytripfinal.domain.member.dto.response.MemberLightResponse
 import com.example.enjoytripfinal.domain.member.entity.Member;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -24,6 +26,11 @@ public class BoardCommentMapper {
         );
     }
 
+    public String dateToString(LocalDateTime date) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+        return date.format(formatter);
+    }
+
     public BoardResponse entityToResponse(Board board) {
         return new BoardResponse(
                 board.getId(),
@@ -34,7 +41,7 @@ public class BoardCommentMapper {
                         board.getMember().getId(),
                         board.getMember().getNickName()
                 ),
-                board.getDate()
+                dateToString(board.getDate())
         );
     }
     public Comment dtoToCommentEntity(WriteCommentRequest request) {
@@ -50,7 +57,7 @@ public class BoardCommentMapper {
                         comment.getMember().getId(),
                         comment.getMember().getNickName()
                 ),
-                comment.getDate()
+                dateToString(comment.getDate())
         );
     }
 

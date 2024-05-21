@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Getter
@@ -16,5 +17,5 @@ public class CommentResponse {
     private UUID boardId;
     private String content;
     private MemberLightResponse member;
-    private LocalDate date;
+    private String date;
 }
