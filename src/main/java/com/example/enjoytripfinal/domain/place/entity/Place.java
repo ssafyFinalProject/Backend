@@ -24,16 +24,19 @@ public class Place {
     private Double latitude;
     private Double longitude;
 
+    private String img;
+
     @ColumnDefault("0")
     private Long like;
 
-    public Place(String name,Category category,String roadAddress,String address,Double latitude,Double longitude) {
+    public Place(String name,Category category,String roadAddress,String address,Double latitude,Double longitude,String img) {
         this.name = name;
         this.category = category;
         this.roadAddress = roadAddress;
         this.address = address;
         this.latitude = latitude;
         this.longitude = longitude;
+        this.img = img;
     }
 
     public void updateLike(boolean already) {

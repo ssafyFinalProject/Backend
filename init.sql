@@ -1,7 +1,7 @@
 USE SSAFY;
 
-INSERT INTO SSAFY.place (id,name, category, road_address, address, latitude, longitude) VALUES
-                                                                                            (UUID_TO_BIN(UUID()),'일제 경성호국신사 계단(108계단)', 'TRAVEL', '서울특별시 용산구 신흥로22가길 33', '서울특별시 용산구 용산동2가 1-346', 37.546023, 126.982542),
+INSERT INTO SSAFY.place (id,name, category, road_address, address, latitude, longitude, img) VALUES
+                                                                                            (UUID_TO_BIN(UUID()),'일제 경성호국신사 계단(108계단)', 'TRAVEL', '서울특별시 용산구 신흥로22가길 33', '서울특별시 용산구 용산동2가 1-346', 37.546023, 126.982542,'https://search.pstatic.net/common/?src=https%3A%2F%2Fpup-review-phinf.pstatic.net%2FMjAyNDAzMjlfNjQg%2FMDAxNzExNjg5MjAxMDAx.z1Ttl3osTik_X58uD-i5yIsezxR3t156ctVhhH-W_ssg.AUxkdYtOsPKNcUVf-y76asIZyu_6L_t3wZvVSF5s-x0g.JPEG%2F0564148E-FBE9-468F-997F-F6D92AC0EC37.jpeg%3Ftype%3Dw1500_60_sharpen'),
                                                                                             (UUID_TO_BIN(UUID()),'찬바람재', 'TRAVEL', '서울특별시 용산구 녹사평대로 195', '서울특별시 용산구 용산동2가 7-99', 37.534815, 126.987014),
                                                                                             (UUID_TO_BIN(UUID()),'옛 남영동 대공분실(민주인권기념관)', 'TRAVEL', '서울특별시 용산구 한강대로71길 37', '서울특별시 용산구 갈월동 98-8', 37.541012, 126.971635),
                                                                                             (UUID_TO_BIN(UUID()),'옛 용산공설시장(현 남영아케이드)', 'TRAVEL', '서울특별시 용산구 한강대로84길 7', '서울특별시 용산구 남영동 28-8', 37.543723, 126.972924),

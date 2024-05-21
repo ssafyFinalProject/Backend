@@ -28,7 +28,8 @@ public class PostMapper {
                         place.getRoadAddress(),
                         place.getAddress(),
                         place.getLatitude(),
-                        place.getLongitude()
+                        place.getLongitude(),
+                        place.getImg()
                 )
         );
 

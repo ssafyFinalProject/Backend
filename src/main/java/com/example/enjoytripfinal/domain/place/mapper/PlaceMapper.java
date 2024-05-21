@@ -14,7 +14,8 @@ public class PlaceMapper {
                 place.getRoadAddress(),
                 place.getAddress(),
                 place.getLatitude(),
-                place.getLongitude()
+                place.getLongitude(),
+                place.getImg()
         );
     }
 }

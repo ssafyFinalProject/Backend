@@ -25,4 +25,6 @@ public class PlaceResponse {
     private Double latitude;
 
     private Double longitude;
+
+    private String img;
 }
