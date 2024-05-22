@@ -29,7 +29,8 @@ public class PostMapper {
                         place.getAddress(),
                         place.getLatitude(),
                         place.getLongitude(),
-                        place.getImg()
+                        place.getImg(),
+                        place.getLike()
                 )
         );
 

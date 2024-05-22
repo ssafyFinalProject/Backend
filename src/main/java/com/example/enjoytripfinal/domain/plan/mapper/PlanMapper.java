@@ -44,7 +44,8 @@ public class PlanMapper {
                             curPlace.getAddress(),
                             curPlace.getLatitude(),
                             curPlace.getLongitude(),
-                            curPlace.getImg()
+                            curPlace.getImg(),
+                            curPlace.getLike()
                     )
             ));
         }
