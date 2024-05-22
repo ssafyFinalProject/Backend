@@ -27,7 +27,7 @@ public class Plan {
 
     private LocalDate planDay;
 
-    @OneToMany(mappedBy = "plan", cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "plan", cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE}, fetch = FetchType.LAZY, orphanRemoval = true)
     @BatchSize(size = 10)
     private List<Post> posts = new ArrayList<>();
 
