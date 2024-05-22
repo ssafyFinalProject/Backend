@@ -14,6 +14,7 @@ import com.example.enjoytripfinal.domain.place.repository.PlaceRepository;
 
 import jakarta.persistence.EntityNotFoundException;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -69,8 +70,10 @@ public class PlaceService {
         Member curMember = memberService.getMemberByJwt();
         Place curPlace = findPlaceById(request.getPlaceId());
 
-        if(alreadyExistPlace(curMember,curPlace))
+        if(alreadyExistPlace(curMember,curPlace)) {
+            curPlace.updateLike(true);
             return placeMapper.entityToResponse(curPlace);
+        }
 
         curPlace.updateLike(false);
         PlaceMember placeMember = placeMemberRepository.save(new PlaceMember(curPlace,curMember));
@@ -101,6 +104,11 @@ public class PlaceService {
             }
         }
         return false;
+    }
+
+    public List<PlaceResponse> getMostLikePlaces(Integer count) {
+        return placeRepository.findMostLikePlaces(PageRequest.of(0,count))
+                .getContent().stream().map(placeMapper::entityToResponse).toList();
     }
 }
 

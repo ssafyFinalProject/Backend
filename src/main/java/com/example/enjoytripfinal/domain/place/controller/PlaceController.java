@@ -59,4 +59,9 @@ public class PlaceController {
     public ResponseEntity<List<PlaceResponse>> getMyPlaces( @PageableDefault(size = 10, sort = "id", direction = Sort.Direction.DESC) Pageable pageable) {
         return ResponseEntity.ok(placeService.getMyPickPlaces(pageable));
     }
+
+    @GetMapping("/top")
+    public ResponseEntity<List<PlaceResponse>> getTopPlaces(@RequestParam("count") Integer count) {
+        return ResponseEntity.ok(placeService.getMostLikePlaces(count));
+    }
 }
