@@ -54,13 +54,13 @@ public class PlanController {
     }
 
     @DeleteMapping
-    public ResponseEntity<Void> deletePlan(@RequestParam UUID id) {
+    public ResponseEntity<Void> deletePlan(@RequestParam("id") UUID id) {
         planService.deletePlan(id);
         return ResponseEntity.ok().build();
     }
 
     @DeleteMapping("/post")
-    public ResponseEntity<Void> deletePost(@RequestParam UUID id) {
+    public ResponseEntity<Void> deletePost(@RequestParam("id") UUID id) {
         planService.deletePost(id);
         return ResponseEntity.ok().build();
     }
