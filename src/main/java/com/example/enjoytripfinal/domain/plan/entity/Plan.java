@@ -23,7 +23,6 @@ public class Plan {
     private String name;
     private String content;
     private LocalDate planDay;
-
     private String mainImage;
 
     @OneToMany(mappedBy = "plan", cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE}, fetch = FetchType.LAZY, orphanRemoval = true)
