@@ -20,12 +20,11 @@ public class Plan {
     @Id
     @Column(columnDefinition = "BINARY(16)")
     private UUID id = UlidCreator.getMonotonicUlid().toUuid();
-
     private String name;
-
     private String content;
-
     private LocalDate planDay;
+
+    private String mainImage;
 
     @OneToMany(mappedBy = "plan", cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE}, fetch = FetchType.LAZY, orphanRemoval = true)
     @BatchSize(size = 10)
@@ -39,6 +38,7 @@ public class Plan {
         this.name = name;
         this.content = content;
         this.planDay = planDay;
+        this.mainImage = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR_3quuwjtFK5N03p_uTdpEK-_dnCKxvsN7dQ&s";
     }
 
     public void updatePlan(String name, String content, LocalDate planDay) {
@@ -50,6 +50,10 @@ public class Plan {
     public void updateMember(Member member) {
         member.getPlans().add(this);
         this.member = member;
+    }
+
+    public void updateImage(String mainImage) {
+        this.mainImage = mainImage;
     }
 
 }
