@@ -12,7 +12,6 @@ import org.springframework.stereotype.Component;
 public class PostMapper {
     public Post toEntity(MakePostRequest request, Plan plan) {
         Post post = new Post(request.getName(),request.getContent(),request.getPostDay());
-        post.updatePlan(plan);
         return post;
     }
 

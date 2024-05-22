@@ -66,9 +66,9 @@ public class PlanService {
     public PostResponse addPost(MakePostRequest request) {
         Place place = placeService.findPlaceById(request.getPlaceId());
         Plan plan = findPlanById(request.getPlanId());
-        Post post = postMapper.toEntity(request,plan);
+        Post post = postRepository.save(postMapper.toEntity(request,plan));
+        post.updatePlan(plan);
         post.updatePlace(place);
-        postRepository.save(post);
 
         return postMapper.toPostResponse(post,place);
     }
