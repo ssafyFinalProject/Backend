@@ -27,4 +27,6 @@ public class PlaceResponse {
     private Double longitude;
 
     private String img;
+
+    private Long like;
 }
