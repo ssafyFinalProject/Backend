@@ -20,6 +20,7 @@ public class PostMapper {
                 post.getId(),
                 post.getName(),
                 post.getContent(),
+                post.getPostDay(),
                 new PlaceResponse(
                         place.getId(),
                         place.getName(),

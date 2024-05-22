@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.UUID;
 
@@ -15,5 +16,6 @@ public class PostResponse {
     private UUID postId;
     private String name;
     private String content;
+    private LocalDate postDay;
     private PlaceResponse place;
 }

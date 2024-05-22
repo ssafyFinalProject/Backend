@@ -35,6 +35,7 @@ public class PlanMapper {
                     post.getId(),
                     post.getName(),
                     post.getContent(),
+                    post.getPostDay(),
                     new PlaceResponse(
                             curPlace.getId(),
                             curPlace.getName(),
@@ -58,7 +59,8 @@ public class PlanMapper {
         return new PlanResponse(
                 plan.getId(),
                 plan.getName(),
-                plan.getContent()
+                plan.getContent(),
+                plan.getPlanDay()
         );
     }
 
