@@ -70,8 +70,10 @@ public class PlaceService {
         Member curMember = memberService.getMemberByJwt();
         Place curPlace = findPlaceById(request.getPlaceId());
 
-        if(alreadyExistPlace(curMember,curPlace))
+        if(alreadyExistPlace(curMember,curPlace)) {
+            curPlace.updateLike(true);
             return placeMapper.entityToResponse(curPlace);
+        }
 
         curPlace.updateLike(false);
         PlaceMember placeMember = placeMemberRepository.save(new PlaceMember(curPlace,curMember));
