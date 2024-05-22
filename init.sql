@@ -77,6 +77,7 @@ create table if not exists refresh_token
 create table if not exists plan
 (
     plan_day  date         null,
+    main_image varchar(1024) not null,
     id        binary(16)   not null
         primary key,
     member_id binary(16)   null,
