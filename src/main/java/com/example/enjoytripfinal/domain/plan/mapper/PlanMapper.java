@@ -61,7 +61,8 @@ public class PlanMapper {
                 plan.getId(),
                 plan.getName(),
                 plan.getContent(),
-                plan.getPlanDay()
+                plan.getPlanDay(),
+                plan.getMainImage()
         );
     }
 

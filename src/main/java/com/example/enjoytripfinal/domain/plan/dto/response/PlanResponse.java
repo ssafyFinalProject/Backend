@@ -15,4 +15,5 @@ public class PlanResponse {
     private String name;
     private String content;
     private LocalDate planDate;
+    private String mainImage;
 }

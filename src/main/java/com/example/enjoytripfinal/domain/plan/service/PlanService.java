@@ -69,6 +69,7 @@ public class PlanService {
         Post post = postRepository.save(postMapper.toEntity(request,plan));
         post.updatePlan(plan);
         post.updatePlace(place);
+        plan.updateImage(place.getImg());
 
         return postMapper.toPostResponse(post,place);
     }
