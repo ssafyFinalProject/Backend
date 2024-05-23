@@ -1,7 +1,6 @@
 ![image](https://github.com/ssafyFinalProject/Backend/assets/84346055/08b0af39-4b86-4374-8e9c-5acea2993cd2)
 
 ## 관광지 정보 제공 및 여행 계획 관리 서비스
----
 - 최신화된 국내 관광지 정보 제공
 - 여행 계획 관리 서비스 제공
 ## 기능 소개
