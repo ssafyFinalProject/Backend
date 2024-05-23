@@ -4,7 +4,6 @@
 - 최신화된 국내 관광지 정보 제공
 - 여행 계획 관리 서비스 제공
 ## 기능 소개
----
 ### **🗺️ 최신화된 국내 관광지 정보 제공**
 - 목적지 이름, 카테고리, 도로명 주소 별 검색 가능
 ### **🛣️ Chat GPT 연동을 통해 관광지에 대한 추가 정보 제공**
@@ -19,10 +18,8 @@
 ### **📱 게시판 기능 제공**
 - 게시글을 올리고 댓글을 통해 다른 사용자와 소통 가능
 ## 시스템 아키텍처
----
 ![image](https://github.com/ssafyFinalProject/Backend/assets/84346055/5fce8ded-ce00-444b-856c-ddc22b78e82f)
 ## DB ERD
----
 ![image](https://github.com/ssafyFinalProject/Backend/assets/84346055/576aa279-23fe-4d6c-8f3f-af87f723a70e)
 ## 사용 기술
 ## 사용 기술
