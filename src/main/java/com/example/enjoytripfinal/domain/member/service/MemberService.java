@@ -12,6 +12,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -73,5 +74,9 @@ public class MemberService {
 
     public DuplicateEmailResponse checkDuplicateEmail(String email) {
         return new DuplicateEmailResponse(memberRepository.existsByEmail(email));
+    }
+
+    public MemberResponse findMemberByEmail(String email) {
+        return memberMapper.entityToDto(memberRepository.findByEmail(email).orElseThrow(EntityNotFoundException::new));
     }
 }

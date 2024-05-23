@@ -50,4 +50,9 @@ public class MemberController {
         memberService.deleteMember(id);
         return ResponseEntity.ok().build();
     }
+
+    @GetMapping("/find")
+    public ResponseEntity<MemberResponse> findMember(@PathVariable(name = "email") String email) {
+        return ResponseEntity.ok(memberService.findMemberByEmail(email));
+    }
 }
