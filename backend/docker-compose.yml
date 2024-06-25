@@ -1,6 +1,12 @@
 version: "3.8"
 
 services:
+  backend:
+    build: ..
+    container_name: backend
+    ports:
+      - "8080:8080"
+    restart: always
   db:
     image: mysql
     container_name: db
@@ -8,7 +14,7 @@ services:
       - 3307:3306
     environment:
       TZ: Asia/Seoul
-    env_file: .env
+    env_file: ../.env
     restart: always
     command:
       - --character-set-server=utf8mb4
